@@ -1,0 +1,13 @@
+{
+  "name": "llm-plugin",
+  "description": "Personal Plugin",
+  "author": {
+    "name": "Micah Smith"
+  },
+  "category": "development",
+  "version": "0.0.1",
+  "homepage": "https://github.com/micahsmith/llm-plugin",
+  "skills": [
+    "./skills/example-skill"
+  ]
+}

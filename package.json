@@ -1,0 +1,22 @@
+{
+  "name": "llm-plugin",
+  "version": "0.0.1",
+  "description": "Personal plugin",
+  "type": "module",
+  "files": [
+    ".claude-plugin",
+    "skills",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micahsmith/llm-plugin.git"
+  },
+  "author": "Micah Smith",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "plugin"
+  ]
+}
