@@ -1,14 +1,14 @@
 ---
-name: artifact
-description: Compact the conversational context into a persisted artifact.
-argument-hint: "What will you use the artifact for?"
+name: handoff
+description: Compact the conversational context into a persisted handoff file.
+argument-hint: "What will you use the handoff for?"
 disable-model-invocation: true
 ---
 
 Create a file that condenses the current context into a standalone file. An agent with an empty
-context should be able to read the artifact and continue the work without additional inputs.
+context should be able to read the handoff and continue the work without additional inputs.
 
-If an argument is provided, treat it as a description of the artifact's intended use and tailor the
+If an argument is provided, treat it as a description of the handoff's intended use and tailor the
 content toward that goal.
 
 ## Save location
@@ -20,13 +20,13 @@ content toward that goal.
 
 ## Filename
 
-Name the file `artifact-<short-summary>-<date>.md`, where:
+Name the file `handoff-<short-summary>-<date>.md`, where:
 
 - `<short-summary>` is at most three words in kebab-case describing the content.
 - `<date>` is obtained from the shell with `date +%F` (which yields `YYYY-MM-DD`).
 
 Apply this name regardless of save location. For the `mktemp` fallback, pass it as the template,
-e.g., `mktemp -t "artifact-auth-refactor-$(date +%F)-XXXXXX.md"`.
+e.g., `mktemp -t "handoff-auth-refactor-$(date +%F)-XXXXXX.md"`.
 
 ## What to write
 
@@ -38,7 +38,7 @@ Prefer references over inlined content:
 - Cite commits by `git` SHA.
 - Cite external sources by URL.
 
-Structure the artifact with these sections (omit any that would be empty):
+Structure the handoff with these sections (omit any that would be empty):
 
 - **Goal**: a 1-3 sentence summary of purpose which takes into account both the current conversation
   and the user provided argument (if provided).
@@ -51,4 +51,4 @@ Structure the artifact with these sections (omit any that would be empty):
   Provide these in order if possible.
 - **Gotchas**: non-obvious traps, failed approaches, and things that look wrong but aren't.
 
-Report the artifact's path back to the user.
+Report the handoff's path back to the user.
