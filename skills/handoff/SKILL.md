@@ -44,7 +44,7 @@ Structure the handoff with these sections (omit any that would be empty):
   and the user provided argument (if provided).
 - **Current State**: what has been done and what is unfinished.
 - **Key Locations**: files, paths, URLs, and symbols the next agent needs. Provide a one-line note
-  on it's relevance.
+  explaining why the location is relevant to the conversation.
 - **Decisions & Constraints**: choices already made and why they were made. We want to clarify
   intention and avoid relitigating previous decisions.
 - **Plans**: the concrete steps identified in context that haven't yet been finished (if any).
