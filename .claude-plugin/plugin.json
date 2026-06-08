@@ -1,12 +1,12 @@
 {
-  "name": "llm-plugin",
-  "description": "Personal Plugin",
+  "name": "code-skillset",
+  "description": "custom library of skills for writing code",
   "author": {
-    "name": "Micah Smith"
+    "name": "micah smith"
   },
   "category": "development",
   "version": "0.0.1",
-  "homepage": "https://github.com/micahsmith/llm-plugin",
+  "homepage": "https://github.com/micahsmith/cc-loadout",
   "skills": [
     "./skills/handoff"
   ]

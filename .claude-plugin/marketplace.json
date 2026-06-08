@@ -1,0 +1,24 @@
+{
+  "name": "cc-loadout",
+  "description": "custom marketplace",
+  "owner": {
+    "name": "micah smith"
+  },
+  "plugins": [
+    {
+      "name": "code-skillset",
+      "displayName": "Code Skillset",
+      "description": "custom library of skills for writing code",
+      "author": {
+        "name": "micah smith"
+      },
+      "category": "development",
+      "version": "0.0.1",
+      "source": {
+        "source": "github",
+        "repo": "micahsmith/cc-loadout"
+      },
+      "homepage": "https://github.com/micahsmith/cc-loadout"
+    }
+  ]
+}

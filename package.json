@@ -1,7 +1,7 @@
 {
-  "name": "llm-plugin",
+  "name": "code-skillset",
   "version": "0.0.1",
-  "description": "Personal plugin",
+  "description": "custom library of skills for writing code",
   "type": "module",
   "files": [
     ".claude-plugin",
@@ -10,9 +10,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/micahsmith/llm-plugin.git"
+    "url": "https://github.com/micahsmith/cc-loadout.git"
   },
-  "author": "Micah Smith",
+  "author": "micah smith",
   "license": "MIT",
   "keywords": [
     "claude",
