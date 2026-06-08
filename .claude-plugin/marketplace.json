@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "code-skillset",
-      "displayName": "Code Skillset",
+      "displayName": "code skillset",
       "description": "custom library of skills for writing code",
       "author": {
         "name": "micah smith"
