@@ -14,14 +14,14 @@ description: Create a new skill. Provides guidance on progressive disclosure and
    - Draft SKILL.md and any needed additional files.
    - If the SKILL.md exceeds 500 lines, extract content by domain into reference files.
      - For instance, if a significant portion of the SKILL.md provides information about code standards, extract them into a STANDARDS.md file.
-     - Keep simple scripts (lte 12 lines) inline, otherwise write to the `scripts` directory.
+     - Keep simple scripts (<= 12 lines) inline, otherwise write to the `scripts` directory.
    - When deterministic behavior is desired, use a script.
    - Use simple language. Avoid jargon unless it is needed for clarity.
    - Be concise. Write more ONLY when it provides clarity.
 
 3. **Review**:
    - Provide the user with your draft and get feedback.
-   - Iterate using the guidance from (2) and (3) until the user approves.
+   - Iterate between drafting and feedback until user gives final approval.
 
 ## Structure
 
