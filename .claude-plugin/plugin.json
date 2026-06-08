@@ -8,6 +8,7 @@
   "version": "0.0.1",
   "homepage": "https://github.com/micahsmith/cc-loadout",
   "skills": [
-    "./skills/handoff"
+    "./skills/handoff",
+    "./skills/write-skill"
   ]
 }
