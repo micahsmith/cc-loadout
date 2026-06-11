@@ -8,6 +8,8 @@
   "version": "0.0.1",
   "homepage": "https://github.com/micahsmith/cc-loadout",
   "skills": [
+    "./skills/bootstrap",
+    "./skills/brainstorm",
     "./skills/handoff",
     "./skills/write-skill"
   ]
