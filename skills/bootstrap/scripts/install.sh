@@ -15,9 +15,9 @@ mkdir -p "${CONFIG_DIR}"
 cp "${SCRIPT_DIR}/status-line.sh" "${DEST}"
 chmod +x "${DEST}"
 
-# Backup settings.json
+# Backup settings.json (will not create backup if it already exists)
 [ -f "${SETTINGS}" ] || printf '{}\n' > "${SETTINGS}"
-cp "${SETTINGS}" "${SETTINGS}.bak"
+[ -f "${SETTINGS}.bak" ] || cp "${SETTINGS}" "${SETTINGS}.bak"
 
 # Merge changes into settings.json
 JQ_FILTER="$(cat <<'EOF'
