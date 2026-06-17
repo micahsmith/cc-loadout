@@ -10,7 +10,9 @@
   "skills": [
     "./skills/bootstrap",
     "./skills/brainstorm",
+    "./skills/deep-review",
     "./skills/handoff",
-    "./skills/write-skill"
+    "./skills/write-skill",
+    "./skills/write-spec"
   ]
 }
