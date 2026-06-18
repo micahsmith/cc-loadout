@@ -109,10 +109,21 @@ a single entry that names both report items.
 
 ### 5. Final Report and Summary
 
-Write the full report to `deep-review-<target>-<date>.md` (use `date +%F`). If the repository has
-a temp or scratch directory, prefer that directory for the file. Return the file location to the
-user and a short summary of findings: count of issues by severity, and the top-level blocking
-issues. Do NOT provide the entire final report unless it is three issues or less.
+Write the full report to a file named `review-<target>-<date>.md`, where `<date>` is the output
+of `date +%F`. Resolve the directory for the file:
+
+1. **Review Directory.** If the repository has a directory conventionally used for reviews
+   (`reviews/` or similar), use it.
+1. **Scratch directory.** If an existing scratch directory is present at the repository root (`tmp/`,
+   `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
+2. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
+   a repository.
+
+Do NOT use `mktemp` or any system temp directory.
+
+Report the file location to the user and a short summary of findings: count of issues by severity,
+and the top-level blocking issues. Do NOT provide the entire final report unless it is three issues
+or less.
 
 ### 6. Cleanup
 
