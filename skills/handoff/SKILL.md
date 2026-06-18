@@ -13,10 +13,14 @@ content toward that goal.
 
 ## Save location
 
-1. If the workspace has a designated scratch or temp folder (for instance, if there is a git-ignored
-   tmp folder at the workspace root, that is strong evidence it is a scratch folder), save the file
-   there.
-2. Otherwise, use `mktemp` to create the file.
+Resolve the directory for the file:
+
+1. **Scratch Directory.** If an existing scratch directory is present at the repository root (`tmp/`,
+   `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
+2. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
+   a repository.
+
+Do NOT use `mktemp` or any system temp directory.
 
 ## Filename
 
@@ -24,9 +28,6 @@ Name the file `handoff-<short-summary>-<date>.md`, where:
 
 - `<short-summary>` is at most three words in kebab-case describing the content.
 - `<date>` is obtained from the shell with `date +%F` (which yields `YYYY-MM-DD`).
-
-Apply this name regardless of save location. For the `mktemp` fallback, pass it as the template,
-e.g., `mktemp -t "handoff-auth-refactor-$(date +%F)-XXXXXX.md"`.
 
 ## What to write
 
