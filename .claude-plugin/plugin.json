@@ -12,6 +12,7 @@
     "./skills/brainstorm",
     "./skills/deep-review",
     "./skills/handoff",
+    "./skills/write-plan",
     "./skills/write-skill",
     "./skills/write-spec"
   ]

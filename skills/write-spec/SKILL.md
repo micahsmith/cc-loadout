@@ -23,7 +23,7 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
    missing information has been filled. Do NOT run a full interview.
 4. **Write.** Create the specification file (see "Output").
 5. **Review.** Review the file and fix any remaining issues inline (see "Self-Review").
-6. **Report** the spec file path and a short summary of its contents.
+6. **Report.** Report the spec file path and a short summary of its contents.
 
 ## Template
 
@@ -47,7 +47,7 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
 
 ## Output
 
-### Save location
+### Save Location
 
 Resolve the base directory for the artifact as follows:
 
