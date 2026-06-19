@@ -30,5 +30,6 @@ environments where `ssh` fails.
 | `brainstorm` | Interview session to achieve alignment on design and requirements prior to work. |
 | `deep-review` | Comprehensive code review with a consolidated report artifact. |
 | `handoff` | Compact the conversation into a handoff artifact. |
+| `write-plan` | Write a self-executing implementation plan. |
 | `write-spec` | Write a specification artifact. |
 | `write-skill` | Write a new skill. |
