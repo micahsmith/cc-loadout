@@ -15,7 +15,7 @@ successful execution of the specification/design. Most implementation SHOULD be 
 that will execute the plan. The executor will write the code; the plan is intended to constrain
 choices that are costly to get wrong or that will diverge from alignment on design.
 
-The plan MUST be include instructions for execution in an agentic loop (`/goal`). There SHOULD be NO
+The plan MUST include instructions for execution in an agentic loop (`/goal`). There SHOULD be NO
 assumption that further context or skills will be made available when the plan is implemented. Since
 the loop only reads the conversation transcript, every plan will end with a literal completion
 sentinel to signal completion.
@@ -34,11 +34,11 @@ to create a plan, use `/brainstorm` and `/write-spec` first.
    resolve gaps, ask one question at a time.
 4. **Write.** Create the plan file (see "Output").
 5. **Review.** Scan the draft and fix problems inline (see "Self-Review").
-6. **Report.** Report the plan file path, a short summary of its contents.
+6. **Report.** Report the plan file path and a short summary of its contents.
 
 ## Plan Structure
 
-A plan has three parts:
+A plan has four parts:
 
 1. **Header.** The header includes the feature name, a one-sentence statement of the goal, a link to
    the specification (if it exists), and the slice index with ordering.
@@ -81,7 +81,7 @@ slice is a tracer-bullet). Write slices in order so that each builds on its pred
 
 If the codebase needs to be softened before adding feature slices, include a **prefactoring** slice
 to facilitate easier work for future iterations. ONLY include this prefactoring slice when high
-value. 
+value.
 
 Each slice MUST contain:
 
@@ -121,9 +121,9 @@ Try to resolve the base directory for the plan in this order:
    SAME directory as the specification.
 2. **Conventional Specification Directory.** If a directory conventionally used for plans or
    specifications already exists (`plans/`, `specs/`, `prds/`, or similar), use it.
-2. **Scratch Directory.** Otherwise, if an existing scratch directory is present at the repository
+3. **Scratch Directory.** Otherwise, if an existing scratch directory is present at the repository
    root (`tmp/`, `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
-3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
+4. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
 If there is no specification file to be sibling to the plan, create a new directory whose name is at
