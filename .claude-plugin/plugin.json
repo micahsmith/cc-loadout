@@ -15,5 +15,6 @@
     "./skills/write-plan",
     "./skills/write-skill",
     "./skills/write-spec"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json"
 }

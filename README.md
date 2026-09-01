@@ -1,26 +1,29 @@
 # cc-loadout
 
-Skills library for Claude Code and other agents.
+Skills and hooks library for Claude Code and other agents. 
 
 ## Installation
 
-### Npx Skills
+The easiest installation method is just to prompt (as it doesn't require specific ssh or git
+configuration):
 
-```sh
-npx skills@latest add micahsmith/cc-loadout --all    # install all skills non-interactively
-npx skills@latest add micahsmith/cc-loadout -g --all # install all skills globally
+```text
+Fetch https://github.com/micahsmith/cc-loadout over HTTPS, install it as a plugin marketplace, and
+install the `code-skillset` plugin.
 ```
 
-### Claude Code Marketplace
+If `ssh` is available or `git` is setup to use HTTPS, these commands work:
 
 ```sh
 /plugin marketplace add micahsmith/cc-loadout
 /plugin install code-skillset@cc-loadout
 ```
 
-Note: `/plugin install` will use the existing `git` config. Generally, this means that it will
-attempt to clone the repository via SSH. In turn, the installation may fail in sandboxes or other
-environments where `ssh` fails.
+## Hooks
+
+| Hook | Purpose |
+|------|---------|
+| `technical-writing` | Rules for technical writing that aim to improve comprehension and clarity. |
 
 ## Skills
 
