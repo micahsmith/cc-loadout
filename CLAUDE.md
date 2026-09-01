@@ -9,8 +9,8 @@ for writing:
 
 - Be clear. You MUST avoid excess jargon. Prefer simple and legible prose.
 - Be concise. ONLY add words in service of clarity; cut out any other excess.
-- Use RFC directives. The modality of an instruction should be expressed using all capital terms
-  like 'MUST', 'MUST NOT', 'SHOULD', 'MAY', etc.
+- Use RFC directives in skills and documentation. The modality of an instruction should be
+  expressed using all capital terms like 'MUST', 'MUST NOT', 'SHOULD', 'MAY', etc.
 
 ## Authoring Skills
 
@@ -25,3 +25,7 @@ for writing:
      directory then specs should be written there)
   2. an existing scratch directory (e.g., `tmp/`, `temp/`, `scratch/`, especially if git-ignored)
   3. the repository root or the current working directory if not in a repository
+
+## Hooks
+
+Hooks that ship as part of the plugin are located in `hooks`.
