@@ -23,7 +23,7 @@ If `ssh` is available or `git` is setup to use HTTPS, these commands work:
 
 | Hook | Purpose |
 |------|---------|
-| `technical-writing | Rules for technical writing that aim to improve comprehension and clarity. |
+| `technical-writing` | Rules for technical writing that aim to improve comprehension and clarity. |
 
 ## Skills
 
