@@ -33,6 +33,7 @@ If `ssh` is available or `git` is setup to use HTTPS, these commands work:
 | `brainstorm` | Interview session to achieve alignment on design and requirements prior to work. |
 | `deep-review` | Comprehensive code review with a consolidated report artifact. |
 | `handoff` | Compact the conversation into a handoff artifact. |
+| `write-adr` | Record an architecture decision as a numbered, indexed ADR. |
 | `write-plan` | Write a self-executing implementation plan. |
 | `write-spec` | Write a specification artifact. |
 | `write-skill` | Write a new skill. |
