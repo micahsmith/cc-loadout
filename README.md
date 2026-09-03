@@ -21,9 +21,12 @@ If `ssh` is available or `git` is setup to use HTTPS, these commands work:
 
 ## Hooks
 
-| Hook | Purpose |
-|------|---------|
-| `technical-writing` | Rules for technical writing that aim to improve comprehension and clarity. |
+These guides are injected at `SessionStart` and `SubagentStart`.
+
+| Guide | Purpose |
+|-------|---------|
+| `how-to-write-comments` | Rules for writing code comments and doc comments. |
+| `how-to-write-prose` | Rules for technical writing that aim to improve comprehension and clarity. |
 
 ## Skills
 
