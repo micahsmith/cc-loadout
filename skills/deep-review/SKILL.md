@@ -56,7 +56,7 @@ If the script fails, report the cause to the user.
 
 Spawn one inexpensive agent to read the diffstat and changed-file list. The agent MUST write a 3-6
 sentence plain language summary of the changes. Pass this summary to all reviewers as shared initial
-context.
+context. The summary also opens the final report (see "Report Structure").
 
 ### 3. Parallel Fan-out
 
@@ -105,7 +105,8 @@ the same issue.
 
 Collate, deduplicate, and organize the four reports. Do **NOT** overrule a reviewer: every issue
 a reviewer flags MUST reach the final report. Merge an issue raised by several reviewers into
-a single entry that names every ID which reported it.
+a single entry that names every ID which reported it. A merged entry MUST have a single Context
+block. Rewrite that block rather than concatenating versions from each reviewer.
 
 ### 5. Final Report and Summary
 
@@ -137,7 +138,6 @@ jargon. A reader MUST be able to understand each issue from the report alone.
 
 Use this format:
 
-
 ```
 ### [SEC-1] <one-line title>
 - **Severity:** Blocking | Major | Suggestion | Style
@@ -145,6 +145,11 @@ Use this format:
 - **Location:** `path/to/file.js:120-134`
 
 <code snippet>
+
+**Context**: Why this code exists: what the file or class is responsible for, what job this code
+does for the work on the branch, and who consumes it. Do NOT describe the problem here. Write 3-6
+sentences, grounded in code you have read. If the purpose is unclear, state plainly that the purpose
+is unclear.
 
 **Issue Statement**: What is the problem and why is it a problem.
 
@@ -166,7 +171,9 @@ Group issues by severity, blocking first. Open each report with a 2-3 sentence s
 ## Report Structure
 
 The final report MUST use this format:
-1. **Summary**: a table of issue counts per severity per focus followed by the list of blocking
+1. **What This Branch Does**: the first pass summary from step 2, so that the report states the
+   purpose of the work before it lists problems with the work.
+2. **Summary**: a table of issue counts per severity per focus followed by the list of blocking
    issues.
-2. **Issues by Severity**: (Blocking → Major → Suggestion → Style). Each issue keeps its ID and
+3. **Issues by Severity**: (Blocking → Major → Suggestion → Style). Each issue keeps its ID and
    focus tag. A merged issue MUST list the ID from each reviewer and combine their content.
