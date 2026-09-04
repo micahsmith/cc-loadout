@@ -6,15 +6,5 @@
   },
   "category": "development",
   "version": "0.0.1",
-  "homepage": "https://github.com/micahsmith/cc-loadout",
-  "skills": [
-    "./skills/bootstrap",
-    "./skills/brainstorm",
-    "./skills/deep-review",
-    "./skills/handoff",
-    "./skills/write-plan",
-    "./skills/write-skill",
-    "./skills/write-spec"
-  ],
-  "hooks": "./hooks/hooks.json"
+  "homepage": "https://github.com/micahsmith/cc-loadout"
 }
