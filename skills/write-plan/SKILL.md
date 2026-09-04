@@ -4,31 +4,32 @@ description: Create an implementation plan. The created plan is self-executing, 
 disable-model-invocation: true
 ---
 
-Create an implementation plan from a provided specification (or design provided in the
-conversation). Write the plan as an ordered set of tracer-bullet slices. The plan encodes **how** it
-is to be implemented so that nothing beyond the plan is required to be used in agent loops like
-`/goal`. Thus: every plan must encode **decisions**, **slices**, **tests**, and an **end
-condition**.
+Create an implementation plan from a specification, or from a design given in the conversation.
+Write the plan as an ordered set of tracer-bullet slices. A tracer-bullet slice cuts through every
+layer the feature touches. Each slice is small enough to build and verify on its own, and complete
+enough to demonstrate working behavior end to end.
 
-Plans MAY include code and implementation details, but ONLY when they are absolutely necessary to
-successful execution of the specification/design. Most implementation SHOULD be left to the agent
-that will execute the plan. The executor will write the code; the plan is intended to constrain
-choices that are costly to get wrong or that will diverge from alignment on design.
+The plan MUST be self-contained, because an agent loop will execute it. An agent loop runs an agent
+repeatedly against a stated goal until the goal is judged complete. Assume that no further context,
+skills, or conversation will be available while the plan runs. The loop reads only the conversation
+transcript, so every plan MUST end with a literal completion sentinel that the loop can detect.
 
-The plan MUST include instructions for execution in an agentic loop (`/goal`). There SHOULD be NO
-assumption that further context or skills will be made available when the plan is implemented. Since
-the loop only reads the conversation transcript, every plan will end with a literal completion
-sentinel to signal completion.
+Every plan therefore encodes **decisions**, **slices**, **tests**, and an **end condition**.
 
-A full specification file is preferable as input, but not required. If there is not enough context
-to create a plan, use `/brainstorm` and `/write-spec` first.
+Plans MAY include code and implementation details, but ONLY when the plan cannot otherwise be
+executed successfully. Leave most implementation to the executing agent. The executor writes the
+code. The plan constrains only the choices that are costly to get wrong or that would drift from the
+agreed design.
+
+A full specification file is the preferred input, but it is not required. If you lack the context to
+create a plan, use `/brainstorm` and `/write-spec` first.
 
 ## Process
 
-1. **Explore.** Read any relevant code, tests, and documentation. This exploration will need to be
-   deep, since you need to understand the layers of code that the work crosses, current standards
-   and patterns to follow, and how tests are written and run. You MUST understand sufficiently to be
-   able to define slices, ordering and dependencies, decision anchors, and concrete test cases.
+1. **Explore.** Read any relevant code, tests, and documentation. Explore deeply. You MUST
+   understand the layers of code the work crosses, the standards and patterns to follow, and how
+   tests are written and run. Explore until you can define slices, ordering and dependencies,
+   decision anchors, and concrete test cases.
 2. **Draft Slices.** Decompose the work into tracer-bullet slices (see "Slices").
 3. **Interview & Iterate.** Present the draft. Confirm with the user before proceeding further. To
    resolve gaps, ask one question at a time.
@@ -49,8 +50,8 @@ A plan has four parts:
 
 ### Execution Protocol
 
-Write this block into every plan verbatim. It provides the agent with guidance on how to execute the
-plan within a loop.
+Write this block into every plan verbatim. The block tells the executing agent how to run the plan
+inside a loop.
 
 > ## How To Execute This Plan
 >
@@ -64,7 +65,7 @@ plan within a loop.
 >    the slices it is blocked by have not finished verification. Independent slices MAY run in
 >    parallel ONLY if each runs in its own worktree. Independent worktrees MUST be merged back into
 >    the main worktree once complete.
-> 3. **Delegate Slices to Subagents.** Each subagent should receive ONLY this execution protocol and
+> 3. **Delegate Slices to Subagents.** Each subagent MUST receive ONLY this execution protocol and
 >    details on the slice it is implementing (the plan file identifier and the slice identifier).
 >    Keep context windows small.
 > 4. **TDD.** Use red/green/refactor. Demonstrate failure of the test first, write the minimum
@@ -76,8 +77,8 @@ plan within a loop.
 
 ### Slices
 
-Each slice is a thin vertical slice of the application that can be independently executed (each
-slice is a tracer-bullet). Write slices in order so that each builds on its predecessors.
+Write slices in order so that each one builds on its predecessors. Once its blockers are complete,
+each slice MUST be executable on its own.
 
 If the codebase needs to be softened before adding feature slices, include a **prefactoring** slice
 to facilitate easier work for future iterations. ONLY include this prefactoring slice when high
@@ -85,13 +86,13 @@ value.
 
 Each slice MUST contain:
 
-- **Title.** The title should describe the end-to-end behavior the slice delivers.
-- **Blocked By.** Slices that must be implemented before work can proceed, else "None".
-- **What to Build.** Behavior across the layers the slices intersects (e.g. schema, API, UI). The
+- **Title.** The title MUST describe the end-to-end behavior the slice delivers.
+- **Blocked By.** Slices that MUST be implemented before work can proceed, else "None".
+- **What to Build.** Behavior across the layers the slice intersects (e.g. schema, API, UI). The
   constraints and invariants that MUST be followed. ONLY include code if it is the simplest way to
   express the constraints and invariants.
-- **Decision Anchors.** Interfaces, signatures, and contracts that the implementation must satisfy.
-- **Test Cases.** One test case for each behavior. Tests must cover happy paths, edge cases, and
+- **Decision Anchors.** Interfaces, signatures, and contracts that the implementation MUST satisfy.
+- **Test Cases.** One test case for each behavior. Tests MUST cover happy paths, edge cases, and
   error cases. Each test case states a **name**, **setup/preconditions**, **action** with concrete
   inputs, and the **expected observable result** with concrete values. Do NOT write test code. See
   "Tests" for additional instructions.
@@ -115,7 +116,7 @@ allows loops to detect completion:
 
 ### Save Location
 
-Try to resolve the base directory for the plan in this order:
+Resolve the base directory for the plan as follows:
 
 1. **Specification Directory.** If a specification for this work exists, write the plan into the
    SAME directory as the specification.
@@ -137,10 +138,10 @@ Create the file named `plan-<date>.md`, where `<date>` is the output of `date +%
 
 ### Splitting
 
-Default should be a single file. If the plan grows very large (>1500 lines), split the plan into
+The default SHOULD be a single file. If the plan grows very large (>1500 lines), split the plan into
 a series of sibling files named `plan-<date>-<slice>.md` and keep the `plan-<date>.md` as the
 **index**. The index holds the header, the execution protocol, the slice list with ordering, and the
-completion report. It also includes pointers to each other plan file. Do NOT pre-split small plans.
+completion report. It also points to every other plan file. Do NOT pre-split small plans.
 
 ## Self-Review
 
@@ -154,14 +155,13 @@ Before the final report, scan the draft and fix problems inline:
 - Decision anchors that contradict the specification.
 - Missing execution protocol or completion sentinel.
 
-Additional review will be conducted by the user conversationally.
+The user will review the file conversationally.
 
 ## Tests
 
-Tests MAY be either unit or integration tests. Tests MAY test either behavior or properties. Tests
-should be written to guide the implementation: excessive fixtures and complicated mocking often
-indicate that the unit under test needs to be refactored to simplify the test.
+Tests MAY be either unit or integration tests. Tests MAY verify either behavior or properties.
+Write tests to guide the implementation. Excessive fixtures and complicated mocking often indicate
+that the unit under test needs refactoring.
 
-Do NOT keep tests that are written to confirm that behavior has changed. Tests should be written to
-verify current state and behavior. Any test used to confirm that behavior has changed compared to
-previous states of the codebase should be removed before registering completion.
+Write every test to verify current state and behavior. Delete any test that only confirms behavior
+changed from an earlier state of the codebase. Remove such tests before you report completion.

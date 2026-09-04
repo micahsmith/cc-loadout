@@ -1,20 +1,20 @@
 ---
 name: write-spec
-description: Create a specification detailing the design decisions of a feature. This spec includes what the features is, why it is being built, and the high-level technical decisions that will constrain implementation.
+description: Create a specification detailing the design decisions of a feature. This spec includes what the feature is, why it is being built, and the high-level technical decisions that will constrain implementation.
 disable-model-invocation: true
 ---
 
 Create a specification artifact that records key information: *what* will be built, *why* it is
-being built, and any architectural decisions that constrain implementation. The file that is written
-SHOULD be stable and readable: do NOT include file paths, code, task sequencing, or implementation
-details, as these items are prone to rot.
+being built, and any architectural decisions that constrain implementation. The spec SHOULD be
+stable and readable. Do NOT include file paths, code, task sequencing, or implementation details,
+because these items are prone to rot.
 
 Default behavior is to synthesize the spec from the current conversation and exploration of the
 codebase. Interview the user to fill in gaps. If there is little to no context, use `/brainstorm`.
 
 ## Process
 
-1. **Expore.** Read relevant code, documentation, and recent commits. Read enough to understand the
+1. **Explore.** Read relevant code, documentation, and recent commits. Read enough to understand the
    scope and implications of technical decisions and to avoid specifying existing behavior. Do NOT
    run an exhaustive exploration.
 2. **Draft.** Write a draft of each section (see "Template").
@@ -29,19 +29,19 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
 
 1. **Problem & Context.** A thorough description of the problem from the user's perspective and an
    explanation of why it needs resolution.
-2. **Scope.** A statement of the goals and non-goals of the changes. You MUST be explicit in the
-   statement of non-goals ("changes to authentication will NOT be made").
+2. **Scope.** A statement of the goals and non-goals of the changes. You MUST state non-goals
+   explicitly ("changes to authentication will NOT be made").
 3. **Solution.** The description of how the problem will be solved.
 4. **Requirements.** The complete breakdown of what must be achieved by the changes introduced. Use
    an explicit breakdown into **Functional** and **Non-Functional** requirements (non-functional
    requirements include performance, security, accessibility, reliability, and similar). You MAY
    frame requirements as user stories or as a list of system behaviors/properties.
-5. **Technical Decisions.** Description of high-level decisions and contracts. This section may
+5. **Technical Decisions.** Description of high-level decisions and contracts. This section MAY
    include component boundaries, data flow, and schema shapes. Do NOT include file path references
    or code snippets (unless strictly constrained to spelling out schema shapes).
-6. **Acceptance Criteria.** Every criterion MUST be observable and binary. By default, these SHOULD
-   be expressed as plain testable statements; you MAY use Given/When/Then only when the structure
-   adds clarity. Each criterion MUST reference the requirement it validates.
+6. **Acceptance Criteria.** Every criterion MUST be observable and binary. Write each criterion as
+   a plain testable statement. You MAY use Given/When/Then only when that structure adds clarity.
+   Each criterion MUST reference the requirement it validates.
 7. **Open Questions & Risks.** A statement of known unknowns or deferred decisions and possible
    risks.
 
@@ -49,7 +49,7 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
 
 ### Save Location
 
-Resolve the base directory for the artifact as follows:
+Resolve the base directory for the spec as follows:
 
 1. **Specs Directory.** If the repository has a directory conventionally used for specs (`specs/`,
    `prds/`, or similar), use it.
@@ -68,7 +68,7 @@ output of `date +%F`.
 
 ### Splitting
 
-Default should be a single file. If the specification grows very large (>1500 lines), extract
+The default SHOULD be a single file. If the specification grows very large (>1500 lines), extract
 self-contained appendices (contract details, schemas, or acceptance criteria) into sibling files
 that the primary specification references. Use `spec-<date>-<content>.md`. Do NOT pre-split into
 per-task files.
@@ -83,4 +83,4 @@ Before the final report, scan the draft and fix problems inline:
 - Requirements without at least one acceptance criterion.
 - Contradictions between sections.
 
-Additional review will be conducted by the user conversationally.
+The user will review the file conversationally.
