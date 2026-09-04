@@ -8,8 +8,8 @@ The easiest installation method is just to prompt (as it doesn't require specifi
 configuration):
 
 ```text
-Fetch https://github.com/micahsmith/cc-loadout over HTTPS, install it as a plugin marketplace, and
-install the `code-skillset` plugin.
+Use HTTPS to fetch https://github.com/micahsmith/cc-loadout and (re-)install as the
+`code-skillset` plugin.
 ```
 
 If `ssh` is available or `git` is setup to use HTTPS, these commands work:
