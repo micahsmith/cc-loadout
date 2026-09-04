@@ -1,6 +1,6 @@
 ---
 name: write-skill
-description: Create a new skill. Provides guidance on progressive disclosure and bundled resorces.
+description: Create a new skill. Provides guidance on progressive disclosure and bundled resources.
 ---
 
 ## Process
@@ -12,12 +12,15 @@ description: Create a new skill. Provides guidance on progressive disclosure and
 
 2. **Write Skill**:
    - Draft SKILL.md and any needed additional files.
-   - If the SKILL.md exceeds 500 lines, extract content by domain into reference files.
-     - For instance, if a significant portion of the SKILL.md provides information about code standards, extract them into a STANDARDS.md file.
-     - Keep simple scripts (<= 12 lines) inline, otherwise write to the `scripts` directory.
-   - When deterministic behavior is desired, use a script.
+   - Use progressive disclosure. Keep SKILL.md short and move detail into files that the agent
+     reads only when it needs them.
+   - If the SKILL.md exceeds 500 lines, extract content by domain into reference files. For
+     instance, if a large part of the SKILL.md covers code standards, move that content into
+     a STANDARDS.md file.
+   - Keep simple scripts (<= 12 lines) inline. Write longer scripts to the `scripts` directory.
+   - Use a script when you need deterministic behavior.
    - Use simple language. Avoid jargon unless it is needed for clarity.
-   - Be concise. Write more ONLY when it provides clarity.
+   - Write more ONLY when extra words add clarity.
 
 3. **Review**:
    - Provide the user with your draft and get feedback.
@@ -40,8 +43,8 @@ skill-name/
 
 ### Description
 
-The description must make it plain when and only when the skill should be used. Explain what the
-skill does and when it should be used. Note if there are any special triggers.
+The description MUST make plain what the skill does and when to use it. Note any special
+triggers.
 
 You MUST conform to these criteria:
 - 1024 character maximum.

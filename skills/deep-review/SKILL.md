@@ -5,7 +5,7 @@ argument-hint: "[target] [base] — default behavior compares `HEAD` against `ma
 disable-model-invocation: true
 ---
 
-Run a through code review of the changes on the branch against the base; then write a single
+Run a thorough code review of the changes on the branch against the base; then write a single
 consolidated report. The review is read-only: it MUST NOT switch branches or touch the user's
 working tree, so that the review process will not interfere with other concurrent work.
 
@@ -17,16 +17,16 @@ consolidated into one final report for review.
 ## Arguments
 
 The arguments indicate the branch under review (`TARGET`) and the branch to compare against
-(`BASE`). Accept both positional references or plain language ("review this branch against the `dev`
-branch).
+(`BASE`). Accept either positional references or plain language ("review this branch against the
+`dev` branch").
 
-- No arguments: `TARGET` is the current branch and `BASE` is `main`, `master`, or whichever branch
-  serves as the primary branch. If obvious branch candidates cannot be found, ask the user.
-- One argument: the provided argument should be considered the `TARGET`. `BASE` is determined using
-  the same rules as above.
+- No arguments: `TARGET` is the current branch. `BASE` is `main`, `master`, or whichever branch
+  serves as the primary branch. If you cannot find an obvious branch candidate, ask the user.
+- One argument: the argument is `TARGET`. Resolve `BASE` using the same rules as above.
 - Two arguments: the first argument is `TARGET` and the second is `BASE`.
-- Default behavior is to fetch the latest from the remote. Pass `--no-fetch` to
-  the prep script when the user asks to skip it or is working offline.
+
+By default, fetch the latest from the remote. Pass `--no-fetch` to the prep script when the user
+asks to skip the fetch or is working offline.
 
 ## Steps
 
@@ -54,9 +54,9 @@ If the script fails, report the cause to the user.
 
 ### 2. First Pass Summary
 
-Spawn one cheap agent to read the diffstate and changed-file list. The agent should write a 3-6
-sentence plain language summary of the changes. This summary should be passed to all reviewers to
-provide shared initial context.
+Spawn one inexpensive agent to read the diffstat and changed-file list. The agent MUST write a 3-6
+sentence plain language summary of the changes. Pass this summary to all reviewers as shared initial
+context. The summary also opens the final report (see "Report Structure").
 
 ### 3. Parallel Fan-out
 
@@ -68,7 +68,7 @@ individual focus:
 - The first pass summary from step 2.
 - Instructions on issue report format and individual focus.
 
-Each reviewer should run the `DIFF_CMD` itself, explore under `WORKDIR`, and return with a report.
+Each reviewer MUST run the `DIFF_CMD` itself, explore under `WORKDIR`, and return with a report.
 Always launch all four reviewers regardless of how small the diff is. A reviewer MAY report "No
 issues found".
 
@@ -79,65 +79,64 @@ The four focuses:
   - Authentication/authorization failures
   - Unsafe input handling
   - Unsafe handling of sensitive data
-- **Performance**:
+- **Performance**
   - Needless work or complexity
   - N+1 queries
   - Wasteful memory allocations or I/O ops
-- **Correctness**:
+- **Correctness**
   - Errors in logic
   - Broken edge cases
   - Race conditions
   - Incorrect or incomplete error handling
-  - Unintended backwards compatibility
+  - Unintended breaks in backwards compatibility
   - Mismatch with intent
-- **Style**:
+- **Style**
   - Non-idiomatic use of language or framework
   - Violation of existing codebase patterns
   - Illegible or hard to decipher code blocks
   - Excessive or trivial comments on well-written code
   - Violation of any rules provided in `AGENTS.md`, `CLAUDE.md` and the like
 
-Rule for reviewers: Stay in your lane. Don't report issues that are not pertinent to your domain and
-focus. If however, an issue MIGHT pertain to your focus -- even if it might be considered part of
-another domain -- do report it. Multiple reports of the same issue across reviewers is acceptable.
+Rule for reviewers: report ONLY issues pertinent to your focus. However, if an issue MIGHT pertain
+to your focus, report it even when it also belongs to another focus. Several reviewers MAY report
+the same issue.
 
 ### 4. Consolidated Report
 
-Collate, deduplicate, and organize the four reports. Do **NOT** overrule a reviewer: issues flagged
-by reviewers should always make it to the final report. Merge issues raised by multiple reviews into
-a single entry that names both report items. 
+Collate, deduplicate, and organize the four reports. Do **NOT** overrule a reviewer: every issue
+a reviewer flags MUST reach the final report. Merge an issue raised by several reviewers into
+a single entry that names every ID which reported it. A merged entry MUST have a single Context
+block. Rewrite that block rather than concatenating versions from each reviewer.
 
 ### 5. Final Report and Summary
 
 Write the full report to a file named `review-<target>-<date>.md`, where `<date>` is the output
-of `date +%F`. Resolve the directory for the file:
+of `date +%F`. Resolve the base directory for the file as follows:
 
-1. **Review Directory.** If the repository has a directory conventionally used for reviews
+1. **Reviews Directory.** If the repository has a directory conventionally used for reviews
    (`reviews/` or similar), use it.
-1. **Scratch directory.** If an existing scratch directory is present at the repository root (`tmp/`,
-   `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
-2. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
+2. **Scratch Directory.** Otherwise, if an existing scratch directory is present at the repository
+   root (`tmp/`, `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
+3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
 Do NOT use `mktemp` or any system temp directory.
 
-Report the file location to the user and a short summary of findings: count of issues by severity,
-and the top-level blocking issues. Do NOT provide the entire final report unless it is three issues
-or less.
+Report the file location to the user with a short summary of findings: the count of issues by
+severity, and the top-level blocking issues. Do NOT reproduce the entire report unless it contains
+three or fewer issues.
 
 ### 6. Cleanup
 
-If the prep return a `CLEANUP` line, run it to remove the worktree.
+If the prep script returned a `CLEANUP` line, run that command to remove the worktree.
 
 ## Issue Format
 
-Every reviewer MUST use this standard format for every issue. Issues must be reported in plain and
-simple language: technical terms commonly understood by developers are permissible but generally
-avoid relying on jargon. Your goal is to make each issue easy to understand by simply reading the
-report.
+Every reviewer MUST use this standard format for every issue. Write each issue in plain and simple
+language. You MAY use technical terms that developers commonly understand, but you MUST avoid
+jargon. A reader MUST be able to understand each issue from the report alone.
 
 Use this format:
-
 
 ```
 ### [SEC-1] <one-line title>
@@ -147,6 +146,11 @@ Use this format:
 
 <code snippet>
 
+**Context**: Why this code exists: what the file or class is responsible for, what job this code
+does for the work on the branch, and who consumes it. Do NOT describe the problem here. Write 3-6
+sentences, grounded in code you have read. If the purpose is unclear, state plainly that the purpose
+is unclear.
+
 **Issue Statement**: What is the problem and why is it a problem.
 
 **Proposed Solution:** How the problem could be resolved, and why the proposed solution fixes it.
@@ -155,14 +159,21 @@ Use this format:
 what ambiguity or intent needs to be resolved in order to confirm status.
 ```
 
-ID prefixes per focus: `SEC` (security), `PERF` (performance), `COR`
-(correctness), `STY` (style). Group issues by severity, blocking first.
-Open each report with a 2-3 sentence summary.
+Use one ID prefix per focus:
+
+- `SEC` for security and privacy
+- `PERF` for performance
+- `COR` for correctness
+- `STY` for style
+
+Group issues by severity, blocking first. Open each report with a 2-3 sentence summary.
 
 ## Report Structure
 
-The final report should use this format:
-1. **Summary**: a table of issue counts per severity per focus followed by the list of blocking
+The final report MUST use this format:
+1. **What This Branch Does**: the first pass summary from step 2, so that the report states the
+   purpose of the work before it lists problems with the work.
+2. **Summary**: a table of issue counts per severity per focus followed by the list of blocking
    issues.
-2. **Issues by Severity**: (Blocking → Major → Suggestion → Style). Each issue keeps its ID and
-   focus tag. Merged issues should merge the IDs from individual reviewers but combine content.
+3. **Issues by Severity**: (Blocking → Major → Suggestion → Style). Each issue keeps its ID and
+   focus tag. A merged issue MUST list the ID from each reviewer and combine their content.
