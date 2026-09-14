@@ -21,7 +21,7 @@ questions from the codebase before asking the user.
   - You MAY ask open-ended questions when the space is genuinely open.
   - You MAY use `AskUserQuestion`.
   - If the topic under discussion implies trade-offs, explicitly state the trade-offs.
-  - You MAY recommend an answer but do not need to do so.
+  - You MAY recommend an answer.
 - **Work through decisions in order:**
   - Address decisions that have broader implications first and keep minor decisions to the end.
   - Only resolve decisions that change the outcome. Be relentless about alignment, but stop short

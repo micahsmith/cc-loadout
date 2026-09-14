@@ -26,8 +26,8 @@ user first confirms the edit is allowed.
 Edit comments only. All executable code MUST be byte-identical upon completion. Do NOT rename,
 extract, change logic, or reformat. You MAY remove whitespace orphaned by a deleted comment.
 
-Comments that exist to clarify or warn about poorly written code are doing important work and should
-not be changed. Report these comments to the user. Do NOT fix the code until the user first confirms
+Comments that exist to clarify or warn about poorly written code are doing important work and MUST
+NOT be changed. Report these comments to the user. Do NOT fix the code until the user first confirms
 the edit is allowed.
 
 ## Code Comments
@@ -53,11 +53,11 @@ instead.
    or false comment is worse than a missing comment.
 4. **Protected Comment.** The comment matches a category under the "Protected Comments" section.
    **Keep it.**
-5. **Everything Else.** All other comments should be kept. **Keep it.**
+5. **Everything Else.** All other comments MUST be kept. **Keep it.**
 
 ### Phase 2: Tighten
 
-All comments that are kept should be subjected to the deletion test one sentence at a time: delete
+All comments that are kept MUST be subjected to the deletion test one sentence at a time: delete
 the sentence and name the fact that has been lost with its deletion. If you cannot name a fact that
 is now absent from the file, that sentence MUST be removed from the comment. Keep the sentences that
 survive the deletion test.
@@ -81,9 +81,9 @@ Doc comments document declarations for their callers. Use these steps instead of
    package or module. If most siblings do not carry doc comments, **delete it**. If there is nothing
    to sample, **delete it**.
 3. **Signature.** Apply the deletion test per sentence, as in Phase 2 above. A sentence that merely
-   restates what is already present in the signature should stay deleted.
+   restates what is already present in the signature MUST be deleted.
 
-Doc comments that survive should state the contract: guarantees, return values, errors raised,
+Doc comments that survive SHOULD state the contract: guarantees, return values, errors raised,
 caller obligations, and surprising behavior. The doc comments MUST NOT state implementation details.
 A caller needs to know whether a method is thread-safe, for example, but not which executor it uses.
 

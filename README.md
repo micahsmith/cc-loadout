@@ -1,42 +1,72 @@
 # cc-loadout
 
-Skills and hooks library for Claude Code and other agents. 
+Skills and hooks library for Claude Code and other agents.
 
 ## Installation
 
-The easiest installation method is just to prompt (as it doesn't require specific ssh or git
-configuration):
+This repository is a Claude Code plugin marketplace named `cc-loadout`. The marketplace provides
+one plugin, named `code-skillset`.
 
-```text
-Use HTTPS to fetch https://github.com/micahsmith/cc-loadout and (re-)install as the
-`code-skillset` plugin.
-```
+### Install
 
-If `ssh` is available or `git` is setup to use HTTPS, these commands work:
+Run these commands in a terminal:
 
 ```sh
-/plugin marketplace add micahsmith/cc-loadout
+claude plugin marketplace add https://github.com/micahsmith/cc-loadout.git
+claude plugin install code-skillset@cc-loadout
+```
+
+Inside a Claude Code session, use the `/plugin` equivalents instead:
+
+```text
+/plugin marketplace add https://github.com/micahsmith/cc-loadout.git
 /plugin install code-skillset@cc-loadout
+```
+
+The commands use an HTTPS URL, so they work without SSH keys. Both commands are safe to re-run.
+Restart Claude Code to load the plugin.
+
+### Update
+
+Updates track the latest commit on the default branch:
+
+```sh
+claude plugin marketplace update cc-loadout
+claude plugin update code-skillset@cc-loadout
+```
+
+Restart Claude Code to apply the update.
+
+### Reinstall
+
+A reinstall removes all cached state and starts from a clean copy. Use it if an install or update
+fails:
+
+```sh
+claude plugin uninstall code-skillset@cc-loadout
+claude plugin marketplace remove cc-loadout
+claude plugin marketplace add https://github.com/micahsmith/cc-loadout.git
+claude plugin install code-skillset@cc-loadout
 ```
 
 ## Hooks
 
-These guides are injected at `SessionStart` and `SubagentStart`.
+The hooks inject these guides at `SessionStart` and `SubagentStart`.
 
 | Guide | Purpose |
 |-------|---------|
 | `how-to-write-comments` | Rules for writing code comments and doc comments. |
-| `how-to-write-prose` | Rules for technical writing that aim to improve comprehension and clarity. |
+| `how-to-write-prose` | Rules for technical writing that improve clarity and comprehension. |
 
 ## Skills
 
 | Skill | Purpose |
 |-------|---------|
 | `bootstrap` | Apply preferred global settings. |
-| `brainstorm` | Interview session to achieve alignment on design and requirements prior to work. |
-| `cleanup-comments` | Delete unnecessary code comments and tighten comments that remain. |
-| `deep-review` | Comprehensive code review with a consolidated report artifact. |
-| `handoff` | Compact the conversation into a handoff artifact. |
+| `brainstorm` | Interview the user to reach alignment on design and requirements before work begins. |
+| `cleanup-comments` | Delete unnecessary code comments and tighten the comments that remain. |
+| `deep-review` | Review a branch in depth and write a consolidated report. |
+| `handoff` | Compact the conversation into a handoff file. |
 | `write-plan` | Write a self-executing implementation plan. |
-| `write-spec` | Write a specification artifact. |
 | `write-skill` | Write a new skill. |
+| `write-spec` | Write a specification. |

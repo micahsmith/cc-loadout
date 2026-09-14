@@ -46,8 +46,8 @@ reviewed. The summary block includes:
   "in place").
 - `TARGET_SHA`: the commit SHA containing the changes to be reviewed (`TARGET`).
 - `MERGE_BASE`: the `BASE` against which `TARGET` is compared.
-- `DIFF_CMD`: the diff command reviewers should run.
-- `CLEANUP`: the command to cleanup the worktree (if present) after the review is finished.
+- `DIFF_CMD`: the diff command reviewers MUST run.
+- `CLEANUP`: the command to clean up the worktree (if present) after the review is finished.
 - The diffstat and changed-file list.
 
 If the script fails, report the cause to the user.
@@ -60,7 +60,7 @@ context. The summary also opens the final report (see "Report Structure").
 
 ### 3. Parallel Fan-out
 
-Call the four reviewers to run in parallel (the same message passed to four `Agent` calls). DO NOT
+Call the four reviewers to run in parallel (the same message passed to four `Agent` calls). Do NOT
 paste the diff into their prompts. Provide each reviewer with the same context and with its
 individual focus:
 
@@ -73,6 +73,7 @@ Always launch all four reviewers regardless of how small the diff is. A reviewer
 issues found".
 
 The four focuses:
+
 - **Security and Privacy**
   - Leaked secrets
   - Injection threats
@@ -95,7 +96,7 @@ The four focuses:
   - Violation of existing codebase patterns
   - Illegible or hard to decipher code blocks
   - Excessive or trivial comments on well-written code
-  - Violation of any rules provided in `AGENTS.md`, `CLAUDE.md` and the like
+  - Violation of any rules provided in `AGENTS.md`, `CLAUDE.md`, and the like
 
 Rule for reviewers: report ONLY issues pertinent to your focus. However, if an issue MIGHT pertain
 to your focus, report it even when it also belongs to another focus. Several reviewers MAY report
@@ -103,7 +104,7 @@ the same issue.
 
 ### 4. Consolidated Report
 
-Collate, deduplicate, and organize the four reports. Do **NOT** overrule a reviewer: every issue
+Collate, deduplicate, and organize the four reports. Do NOT overrule a reviewer: every issue
 a reviewer flags MUST reach the final report. Merge an issue raised by several reviewers into
 a single entry that names every ID which reported it. A merged entry MUST have a single Context
 block. Rewrite that block rather than concatenating versions from each reviewer.
@@ -120,7 +121,7 @@ of `date +%F`. Resolve the base directory for the file as follows:
 3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
-Do NOT use `mktemp` or any system temp directory.
+Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
 Report the file location to the user with a short summary of findings: the count of issues by
 severity, and the top-level blocking issues. Do NOT reproduce the entire report unless it contains
@@ -146,16 +147,16 @@ Use this format:
 
 <code snippet>
 
-**Context**: Why this code exists: what the file or class is responsible for, what job this code
+**Context:** Why this code exists: what the file or class is responsible for, what job this code
 does for the work on the branch, and who consumes it. Do NOT describe the problem here. Write 3-6
 sentences, grounded in code you have read. If the purpose is unclear, state plainly that the purpose
 is unclear.
 
-**Issue Statement**: What is the problem and why is it a problem.
+**Issue Statement:** What is the problem and why is it a problem.
 
 **Proposed Solution:** How the problem could be resolved, and why the proposed solution fixes it.
 
-**Confidence Note**: (required when Confidence is Medium or Low) Why confidence was not High and
+**Confidence Note:** (REQUIRED when Confidence is Medium or Low) Why confidence was not High and
 what ambiguity or intent needs to be resolved in order to confirm status.
 ```
 
@@ -171,6 +172,7 @@ Group issues by severity, blocking first. Open each report with a 2-3 sentence s
 ## Report Structure
 
 The final report MUST use this format:
+
 1. **What This Branch Does**: the first pass summary from step 2, so that the report states the
    purpose of the work before it lists problems with the work.
 2. **Summary**: a table of issue counts per severity per focus followed by the list of blocking

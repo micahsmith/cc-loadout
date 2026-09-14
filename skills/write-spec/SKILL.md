@@ -19,8 +19,9 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
    run an exhaustive exploration.
 2. **Draft.** Write a draft of each section (see "Template").
 3. **Interview & Iterate.** Examine the draft and identify missing information or weak points. If
-   a required section is missing or anemic, interview the user. Ask one question at a time until all
-   missing information has been filled. Do NOT run a full interview.
+   a required section is missing or anemic, interview the user. Ask one question at a time. Be
+   comprehensive: fill every gap that would change the spec. Do NOT ask a long series of questions
+   about minor details.
 4. **Write.** Create the specification file (see "Output").
 5. **Review.** Review the file and fix any remaining issues inline (see "Self-Review").
 6. **Report.** Report the spec file path and a short summary of its contents.
@@ -58,7 +59,7 @@ Resolve the base directory for the spec as follows:
 3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
-Do NOT use `mktemp` or any system temp directory.
+Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
 ### Filename
 

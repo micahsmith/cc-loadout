@@ -24,7 +24,7 @@ description: Create a new skill. Provides guidance on progressive disclosure and
 
 3. **Review**:
    - Provide the user with your draft and get feedback.
-   - Iterate between drafting and feedback until user gives final approval.
+   - Iterate between drafting and feedback until the user gives final approval.
 
 ## Structure
 
@@ -47,6 +47,7 @@ The description MUST make plain what the skill does and when to use it. Note any
 triggers.
 
 You MUST conform to these criteria:
+
 - 1024 character maximum.
 - 3 sentence maximum.
 - Use simple language.

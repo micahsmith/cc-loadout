@@ -22,7 +22,7 @@ Resolve the base directory for the file as follows:
 3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
-Do NOT use `mktemp` or any system temp directory.
+Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
 ## Filename
 

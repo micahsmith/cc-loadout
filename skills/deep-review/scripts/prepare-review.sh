@@ -58,7 +58,7 @@ CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 # Review in place only when the checked-out commit is the target and the
 # working tree is clean. Otherwise isolate in a detached worktree so the
-# current branch and tree are not effected.
+# current branch and tree are not affected.
 CLEANUP=""
 if [ "$TARGET_SHA" = "$HEAD_SHA" ] && [ -z "$(git status --porcelain)" ]; then
   MODE="inplace"

@@ -21,7 +21,7 @@ executed successfully. Leave most implementation to the executing agent. The exe
 code. The plan constrains only the choices that are costly to get wrong or that would drift from the
 agreed design.
 
-A full specification file is the preferred input, but it is not required. If you lack the context to
+A full specification file is the preferred input, but it is NOT REQUIRED. If you lack the context to
 create a plan, use `/brainstorm` and `/write-spec` first.
 
 ## Process
@@ -104,7 +104,7 @@ Each slice MUST contain:
 End the plan with the report the executor prints only when all slices are verified. This sentinel
 allows loops to detect completion:
 
-> ## Completion report
+> ## Completion Report
 >
 > Print this ONLY when all slice checkpoints are verified:
 >
@@ -130,7 +130,7 @@ Resolve the base directory for the plan as follows:
 If there is no specification file to be sibling to the plan, create a new directory whose name is at
 most four words describing the work to be done in kebab-case, and write the plan there.
 
-Do NOT use `mktemp` or any system temp directory.
+Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
 ### Filename
 
