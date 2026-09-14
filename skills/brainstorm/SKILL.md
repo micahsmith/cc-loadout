@@ -41,9 +41,8 @@ You are aligned when you can state four things and the user agrees with all of t
 - scope
 - success criteria
 
-Before you conclude, surface the choices worth weighing. Propose 2-3 approaches with their
-trade-offs and your recommendation, so that the user chooses the direction rather than assuming
-one.
+Before you conclude, surface any decision that is still open. For each one, propose 2-3 options
+with their trade-offs and your recommendation. The user makes the choice; do NOT assume it.
 
 When you believe you are there, play back the full picture in your own words and ask the user to
 confirm or correct it. Alignment is their agreement, not your assumption.
