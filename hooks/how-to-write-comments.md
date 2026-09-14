@@ -1,61 +1,35 @@
 # Code Comment Style Guide
 
-Version 1.
+Version 2.
 
-Apply these rules to all code comments you write or edit. They cover inline comments and doc
-comments. Defer to the user if they ask for a different style.
+Apply these rules to every code comment you write or edit. Defer to the user if they ask for a
+different style.
 
-Code states what happens. Comments state what code cannot. Every comment MUST earn its place. These
-two rules pull in opposite directions, but both hold:
+Code states what happens. Comments state what code cannot. Default to no comment.
 
-- Inline comments should be used sparingly.
-- On public declarations, particularly for the API of libraries or utility classes/functions,
-  follow the codebase convention.
+## Inline Comments
 
-## Decision Procedure
+Default to no comment. An inline comment MAY exist only as a reason, a constraint, or a warning.
 
-Before writing a comment, run these steps and stop at the first applicable step.
+Apply both of the following tests before writing a comment. Run both hypothetically. Do NOT actually
+write the opening test word into the comment.
 
-- **Step 1.** Is the comment site a public declaration of a library API or utility class or
-  function and is the codebase convention to write doc comments? Write a doc comment (see "Doc
-  Comments").
-- **Step 2.** Does the code already express the comment content? Write no comment.
-- **Step 3.** Would a better name or a small extraction of code remove the need for a comment? Make
-  the code more perspicuous.
-- **Step 4.** Does the comment provide a reason, constraint, or warning that cannot be expressed in
-  the code itself? Write the comment; otherwise write nothing.
+- **Deletion:** Apply the deletion test to each sentence. Delete the sentence and name the fact
+  that is now lost. If you cannot name the fact that is now absent from the file, the sentence
+  should be deleted.
+- **Restatement:** Read the comment as though it started with "Because...", "Requires...", or
+  "Careful:...". If the restated comment is not grammatical or coherent, the comment restates the
+  code and should be deleted.
 
-## Positive Guidance
+A comment that refers to another system, file, or measurement MUST name it.
 
-1. Provide reasons, not mechanics.
-2. State what the code cannot state. Name contract that cannot be enforced by the code.
-3. Put warnings next to the code that needs the warning.
-4. Bound claims so that later readers know when they have ceased to be true.
-
-## Negative Guidance
-
-5. Do NOT restate the code. Delete `// increment the counter` above `counter += 1`.
-6. Do NOT narrate changes. Describe the code as it is. Delete `// now also handles null` and `//
-   added retry logic`.
-7. Do NOT address someone involved in implementation. Delete `// as you requested` and `// per your
-   feedback`. Comments are for future readers, not for present interlocutors.
-8. Most well-written functions need no comments.
-
-## Maintanence
-
-9.  Code changes can invalidate comments. Update or delete invalidated comments in the same change.
-10. Incorrect comments are worse than missing comments. Do NOT make any claim you cannot verify.
-11. Report stale comments you find outside your changes. Do NOT silently fix comments that may be
-    out of scope.
+Do NOT write to the reader of a diff. Delete `// now also handles null` and `// as you requested`.
 
 ## Doc Comments
 
-12. Do NOT add doc comments if the codebase doesn't use them.
-13. Public declarations (especially for the public API or libraries or utilties) are the exception
-    to rules regarding sparseness. Consumers should understand what they are using without reading
-    the implementation.
-14. State the contract. State what guarantees are made, what is returned, what errors may be raised,
-    what precautions callers must take, and any surprising behavior.
-15. Do NOT merely restate the signature.
-16. Do NOT state implementation details. The caller needs to know whether the method is thread-safe,
-    not that threads are created using a particular executor.
+Doc comments serve consumers of a library or utility API: callers who use a declaration without
+reading it. They do NOT belong on everything public.
+
+Match the doc-comment density of sibling declarations. Default to none.
+
+Every sentence MUST state something absent from the name, parameters, and return type.
