@@ -1,6 +1,6 @@
 # Worked Examples
 
-Each case provides an example found comment and how it should be rewritten.
+Each case shows a comment as found and what it should become.
 
 ## Restatement
 
@@ -27,8 +27,7 @@ const user = await client.fetchUser(id)
 const user = await client.fetchUser(id)
 ```
 
-A year from now, no reader will have better understanding because of comments detailing historical
-changes. Delete.
+A year from now, no reader will understand the code better for knowing this. Delete.
 
 ## Bloated Reason
 
@@ -46,12 +45,12 @@ line := fmt.Sprintf(`{"stream":%q,`, streamName)
 line := fmt.Sprintf(`{"stream":%q,`, streamName)
 ```
 
-The comment carries a real constraint but states it four times over. Sentence by sentence: the first
-sentence states what the code shows. The second carries the real information. The third and fourth
-describe a consequence of the consequence and unbuilt future work. Only the second is retained.
+The comment carries a real constraint and states it at four times the length it needs. The first
+sentence states what the code shows. The second sentence opens with the real information, a stable
+prefix that CloudWatch Logs Insights can filter on, and then trails into a second use for that
+prefix and unbuilt future work. Only the opening of the second sentence survives.
 
 ## Protected Comment
-
 
 ```python
 # Keep
@@ -59,8 +58,8 @@ describe a consequence of the consequence and unbuilt future work. Only the seco
 DEFAULT_FEE = 250
 ```
 
-This looks like a restatement but isn't. If it were deleted, the fact of the unit of the constant
-would be lost. The comment should be retained.
+This looks like a restatement but isn't. If it were deleted, the constant's unit would be lost. The
+comment should be retained.
 
 ## Cross-File Sync Pointer
 
@@ -90,7 +89,7 @@ def _normalize_slug(value: str) -> str:
 def _normalize_slug(value: str) -> str:
 ```
 
-The comment is an internal helper in a file where sibling functions do not have doc comments. The
+The function is an internal helper in a file where sibling functions do not have doc comments. The
 audience step fails: no caller uses this without reading it. The density step fails: no sibling has
 one. Moreover, every sentence merely restates what is communicated in the signature.
 
@@ -106,6 +105,6 @@ def parse_duration(text: str) -> timedelta:
     """
 ```
 
-In a published utility function whose callers do not read the implementation, these doc comments
-provide information on how to call the function. Every sentence adds something not present in the
+In a published utility function whose callers do not read the implementation, this doc comment
+provides information on how to call the function. Every sentence adds something not present in the
 signature: the accepted format, the error, and a warning or rejection that callers might not expect.

@@ -5,14 +5,14 @@ disable-model-invocation: true
 ---
 
 Examine the code comments in scope. Only retain the comments that state what the code cannot and
-delete the rest. 
+delete the rest.
 
-The rules here MUST be treated as the definitive style guide for code comments. If the rules
-conflict with other rules, the rules from this skill govern.
+The rules here MUST be treated as the definitive style guide for code comments. If they conflict
+with other guidance, these rules govern.
 
 ## Scope
 
-Presume that the scope of work to cleanup is all uncommitted changes in the working tree. In other
+Presume that the scope of work to clean up is all uncommitted changes in the working tree. In other
 words, the default scope is `git diff HEAD` and any untracked files. If the user specifies
 a different scope, use the stated scope. For example, the user may request to examine all comments
 compared to the base branch. Branches, directories, single files, or the whole repository might be
@@ -23,9 +23,8 @@ user first confirms the edit is allowed.
 
 ## Scope Lock
 
-Edit comments only. All executable code MUST be byte-identical upon completion. Do not rename, do
-not extract, do not change logic, and do not reformat. You MAY remove whitespace orphaned by
-a deleted comment.
+Edit comments only. All executable code MUST be byte-identical upon completion. Do NOT rename,
+extract, change logic, or reformat. You MAY remove whitespace orphaned by a deleted comment.
 
 Comments that exist to clarify or warn about poorly written code are doing important work and should
 not be changed. Report these comments to the user. Do NOT fix the code until the user first confirms
@@ -35,25 +34,25 @@ the edit is allowed.
 
 ### Phase 1: Delete or Keep
 
-Run every comment in scope through these steps in order. Stop at the first step that applies.
-Comments that document classes or functions (i.e., doc comments) should use the "Doc Comments"
-section below instead.
+Run every comment in scope through these steps in order. Stop at the first step that applies. For
+comments that document classes or functions (doc comments), use the "Doc Comments" section below
+instead.
 
-1. **Restate.** Read the comment as though it started with "Because...", "Requires...", or
+1. **Restatement.** Read the comment as though it started with "Because...", "Requires...", or
    "Careful:...". If the restated comment is not grammatical or coherent, the comment restates the
    code. **Delete it.** For example, these comments merely restate code: `// increment the counter`,
-   `// loop ove the users`, `// parse the request body`, and `} end if`.
+   `// loop over the users`, `// parse the request body`, and `} // end if`.
 2. **Change Narration.** Read the comment as though you knew nothing about the history of changes to
    the code. If the comment does not provide help in understanding what the code does or why it was
    written as it is, the comment is providing history that doesn't aid understanding. **Delete it.**
    For example, these comments provide history, but don't serve future developers: `// now also
    handles null`, `// updated to the v2 client`, `// as requested`, `// removed the old fallback`,
    and `// to satisfy acceptance criterion AC7`. That content is included in the commit history.
-3. **Check Staleness.** Determine whether the comment describes code or behavior that no longer
-   exists. If the comment is stale, **delete it** OR correct it so the comment is made accurate.
-   A mistaken or false comment is worse than a missing comment.
-4. **Protected.** The comment matches a category under the "Protected Comments" section. **Keep
-   it.**
+3. **Staleness.** Determine whether the comment describes code or behavior that no longer exists.
+   If the comment is stale, **delete it** OR correct it so the comment is made accurate. A mistaken
+   or false comment is worse than a missing comment.
+4. **Protected Comment.** The comment matches a category under the "Protected Comments" section.
+   **Keep it.**
 5. **Everything Else.** All other comments should be kept. **Keep it.**
 
 ### Phase 2: Tighten
@@ -64,8 +63,8 @@ is now absent from the file, that sentence MUST be removed from the comment. Kee
 survive the deletion test.
 
 Embedding real information and embedding it efficiently are independent judgments. A comment can
-state a genuine constaint and remain far too long or verbose. Phase 2 MUST be applied to all
-comments that survive phase 1. A comment of five lines or more rarely survives contact.
+state a genuine constraint and remain far too long or verbose. Phase 2 MUST be applied to all
+comments that survive Phase 1. A comment of five lines or more rarely survives contact.
 
 Do NOT reword comments that are already clear and concise.
 
@@ -81,9 +80,8 @@ Doc comments document declarations for their callers. Use these steps instead of
 2. **Density.** Do sibling declarations carry doc comments? Check the file and its surrounding
    package or module. If most siblings do not carry doc comments, **delete it**. If there is nothing
    to sample, **delete it**.
-3. **Signature.** Apply the deletion test per sentence, as articulated in "Code Comments" in phase
-   2 above. A sentence that merely restates what is already present in the signature should stay
-   deleted.
+3. **Signature.** Apply the deletion test per sentence, as in Phase 2 above. A sentence that merely
+   restates what is already present in the signature should stay deleted.
 
 Doc comments that survive should state the contract: guarantees, return values, errors raised,
 caller obligations, and surprising behavior. The doc comments MUST NOT state implementation details.

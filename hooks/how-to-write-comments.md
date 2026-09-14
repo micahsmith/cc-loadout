@@ -11,14 +11,15 @@ Code states what happens. Comments state what code cannot. Default to no comment
 
 Default to no comment. An inline comment MAY exist only as a reason, a constraint, or a warning.
 
-Apply both of the following tests before writing a comment. Both tests are to be run
-hypothetically: neither should appear in the output.
+Apply both of the following tests before writing a comment. Run both hypothetically. Do NOT actually
+write the opening test word into the comment.
 
 - **Deletion:** Apply the deletion test to each sentence. Delete the sentence and name the fact
   that is now lost. If you cannot name the fact that is now absent from the file, the sentence
   should be deleted.
-- **Opener:** Read the comment as opening with "Because...", "Requires...", or "Careful:...". If no
-  coherent reading is possible with the opener, the comment restates code and should be deleted.
+- **Restatement:** Read the comment as though it started with "Because...", "Requires...", or
+  "Careful:...". If the restated comment is not grammatical or coherent, the comment restates the
+  code and should be deleted.
 
 A comment that refers to another system, file, or measurement MUST name it.
 
@@ -26,8 +27,8 @@ Do NOT write to the reader of a diff. Delete `// now also handles null` and `// 
 
 ## Doc Comments
 
-Default to no doc comments. Doc comments serve consumers of a library or utility API: callers who
-use a declaration without reading it. They do NOT belong on everything public.
+Doc comments serve consumers of a library or utility API: callers who use a declaration without
+reading it. They do NOT belong on everything public.
 
 Match the doc-comment density of sibling declarations. Default to none.
 
