@@ -4,54 +4,32 @@ Skills and hooks library for Claude Code and other agents.
 
 ## Installation
 
-This repository is a Claude Code plugin marketplace named `cc-loadout`. The marketplace provides
-one plugin, named `code-skillset`.
-
-### Install
-
-Run these commands in a terminal:
-
-```sh
-claude plugin marketplace add https://github.com/micahsmith/cc-loadout.git
-claude plugin install code-skillset@cc-loadout
-```
-
-Inside a Claude Code session, use the `/plugin` equivalents instead:
+Give the prompt below to your agent. Use the same prompt to install, update, or reinstall. Each run
+replaces any earlier copy, so every run ends in the same state.
 
 ```text
-/plugin marketplace add https://github.com/micahsmith/cc-loadout.git
-/plugin install code-skillset@cc-loadout
-```
+Install the `code-skillset` plugin from https://github.com/micahsmith/cc-loadout. Follow these
+steps in order:
 
-The commands use an HTTPS URL, so they work without SSH keys. Both commands are safe to re-run.
-Restart Claude Code to load the plugin.
-
-### Update
-
-Updates track the latest commit on the default branch:
-
-```sh
-claude plugin marketplace update cc-loadout
-claude plugin update code-skillset@cc-loadout
-```
-
-Restart Claude Code to apply the update.
-
-### Reinstall
-
-A reinstall removes all cached state and starts from a clean copy. Use it if an install or update
-fails:
-
-```sh
-claude plugin uninstall code-skillset@cc-loadout
-claude plugin marketplace remove cc-loadout
-claude plugin marketplace add https://github.com/micahsmith/cc-loadout.git
-claude plugin install code-skillset@cc-loadout
+1. Fetch the latest commit of the default branch over HTTPS. Assume you do not have access to SSH.
+2. Remove every earlier installation of `code-skillset`, including cached copies and any
+   `cc-loadout` marketplace entry. Leave everything else in place.
+3. Install at the user level, using the native install mechanism of the agent you are running in:
+   - If the agent supports Claude Code plugin marketplaces, add the repository as the `cc-loadout`
+     marketplace by its HTTPS URL. Then install `code-skillset@cc-loadout`. This step also installs
+     the hooks.
+   - Otherwise, install each directory under `skills/` as a skill. Keep each directory name and its
+     contents unchanged. Then register the hooks in `hooks/` with the agent's equivalent of a
+     session-start hook. If the agent has no equivalent, skip the hooks. Ask for confirmation before
+     editing any global instruction file.
+4. Confirm that every skill under `skills/` is installed.
+5. Report the install location, what was installed, what was skipped, and whether the agent needs to
+   be restarted.
 ```
 
 ## Hooks
 
-The hooks inject these guides at `SessionStart` and `SubagentStart`.
+The hooks add these guides to the context at the start of every session and every subagent.
 
 | Guide | Purpose |
 |-------|---------|
