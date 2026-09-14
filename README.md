@@ -32,14 +32,14 @@ steps in order:
 The hooks add these guides to the context at the start of every session and every subagent.
 
 | Guide | Purpose |
-|-------|---------|
+| --- | --- |
 | `how-to-write-comments` | Rules for writing code comments and doc comments. |
 | `how-to-write-prose` | Rules for technical writing that improve clarity and comprehension. |
 
 ## Skills
 
 | Skill | Purpose |
-|-------|---------|
+| --- | --- |
 | `bootstrap` | Apply preferred global settings. |
 | `brainstorm` | Interview the user to reach alignment on design and requirements before work begins. |
 | `cleanup-comments` | Delete unnecessary code comments and tighten the comments that remain. |
@@ -47,4 +47,4 @@ The hooks add these guides to the context at the start of every session and ever
 | `handoff` | Compact the conversation into a handoff file. |
 | `write-plan` | Write a self-executing implementation plan. |
 | `write-skill` | Write a new skill. |
-| `write-spec` | Write a specification. |
+| `write-spec` | Write a spec. |

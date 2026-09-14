@@ -42,18 +42,17 @@ instead.
    "Careful:...". If the restated comment is not grammatical or coherent, the comment restates the
    code. **Delete it.** For example, these comments merely restate code: `// increment the counter`,
    `// loop over the users`, `// parse the request body`, and `} // end if`.
-2. **Change Narration.** Read the comment as though you knew nothing about the history of changes to
-   the code. If the comment does not provide help in understanding what the code does or why it was
-   written as it is, the comment is providing history that doesn't aid understanding. **Delete it.**
-   For example, these comments provide history, but don't serve future developers: `// now also
-   handles null`, `// updated to the v2 client`, `// as requested`, `// removed the old fallback`,
-   and `// to satisfy acceptance criterion AC7`. That content is included in the commit history.
+2. **Change Narration.** Read the comment as someone who knows nothing about the code's history. If
+   the comment only records that history, **delete it.** For example, these comments only record
+   history: `// now also handles null`, `// updated to the v2 client`, `// as requested`,
+   `// removed the old fallback`, and `// to satisfy acceptance criterion AC7`. The commit history
+   already holds that content.
 3. **Staleness.** Determine whether the comment describes code or behavior that no longer exists.
    If the comment is stale, **delete it** OR correct it so the comment is made accurate. A mistaken
    or false comment is worse than a missing comment.
 4. **Protected Comment.** The comment matches a category under the "Protected Comments" section.
    **Keep it.**
-5. **Everything Else.** All other comments MUST be kept. **Keep it.**
+5. **Everything Else.** The comment matches no step above. **Keep it.**
 
 ### Phase 2: Tighten
 
@@ -64,7 +63,7 @@ survive the deletion test.
 
 Embedding real information and embedding it efficiently are independent judgments. A comment can
 state a genuine constraint and remain far too long or verbose. Phase 2 MUST be applied to all
-comments that survive Phase 1. A comment of five lines or more rarely survives contact.
+comments that survive Phase 1. A comment of five or more lines almost always needs tightening.
 
 Do NOT reword comments that are already clear and concise.
 

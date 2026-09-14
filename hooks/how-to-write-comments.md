@@ -1,6 +1,6 @@
 # Code Comment Style Guide
 
-Version 2.
+Version 3.
 
 Apply these rules to every code comment you write or edit. Defer to the user if they ask for a
 different style.
@@ -9,12 +9,12 @@ Code states what happens. Comments state what code cannot. Default to no comment
 
 ## Inline Comments
 
-Default to no comment. An inline comment MAY exist only as a reason, a constraint, or a warning.
+An inline comment MAY exist only as a reason, a constraint, or a warning.
 
-Apply both of the following tests before writing a comment. Run both hypothetically. Do NOT actually
-write the opening test word into the comment.
+Apply both of the following tests before writing a comment. Run both hypothetically. Do NOT write
+"Because", "Requires", or "Careful" into the comment.
 
-- **Deletion:** Apply the deletion test to each sentence. Delete the sentence and name the fact
+- **Deletion:** Check each sentence on its own. Delete the sentence and name the fact
   that is now lost. If you cannot name the fact that is now absent from the file, the sentence
   MUST be deleted.
 - **Restatement:** Read the comment as though it started with "Because...", "Requires...", or

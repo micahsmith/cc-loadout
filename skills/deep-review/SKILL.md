@@ -1,18 +1,17 @@
 ---
 name: deep-review
-description: Runs a deep review on a branch along four dimensions (security, performance, correctness, style) and creates a consolidated report. Use when the user asks to deeply review or audit a branch without disturbing the working tree.
+description: Runs a deep review on a branch with four focuses (security and privacy, performance, correctness, style) and creates a consolidated report. Use when the user asks to deeply review or audit a branch without disturbing the working tree.
 argument-hint: "[target] [base] — default behavior compares `HEAD` against `main`/`master`"
 disable-model-invocation: true
 ---
 
-Run a thorough code review of the changes on the branch against the base; then write a single
-consolidated report. The review is read-only: it MUST NOT switch branches or touch the user's
-working tree, so that the review process will not interfere with other concurrent work.
+Review the changes on a branch against a base branch, then write one consolidated report. The
+review is read-only. It MUST NOT switch branches or touch the user's working tree, so it cannot
+interfere with other work in progress.
 
-The code review will be done by four separate reviewers, each of which is focused on a single aspect
-(security and privacy, performance, correctness, and style). They explore the changes and the code
-freely, then each writes a focused report on its findings. Lastly, the individual reports are
-consolidated into one final report for review.
+Four reviewers do the review, and each has one focus: security and privacy, performance,
+correctness, or style. Each reviewer explores the changes freely and writes a report. The four
+reports are then combined into one final report.
 
 ## Arguments
 
@@ -58,7 +57,7 @@ Spawn one inexpensive agent to read the diffstat and changed-file list. The agen
 sentence plain language summary of the changes. Pass this summary to all reviewers as shared initial
 context. The summary also opens the final report (see "Report Structure").
 
-### 3. Parallel Fan-out
+### 3. Parallel Fan-Out
 
 Call the four reviewers to run in parallel (the same message passed to four `Agent` calls). Do NOT
 paste the diff into their prompts. Provide each reviewer with the same context and with its
@@ -139,7 +138,7 @@ jargon. A reader MUST be able to understand each issue from the report alone.
 
 Use this format:
 
-```
+```markdown
 ### [SEC-1] <one-line title>
 - **Severity:** Blocking | Major | Suggestion | Style
 - **Confidence:** High | Medium | Low
@@ -173,9 +172,10 @@ Group issues by severity, blocking first. Open each report with a 2-3 sentence s
 
 The final report MUST use this format:
 
-1. **What This Branch Does**: the first pass summary from step 2, so that the report states the
+1. **What This Branch Does.** The first pass summary from step 2, so that the report states the
    purpose of the work before it lists problems with the work.
-2. **Summary**: a table of issue counts per severity per focus followed by the list of blocking
+2. **Summary.** A table of issue counts per severity per focus followed by the list of blocking
    issues.
-3. **Issues by Severity**: (Blocking → Major → Suggestion → Style). Each issue keeps its ID and
-   focus tag. A merged issue MUST list the ID from each reviewer and combine their content.
+3. **Issues by Severity.** Issues in order: Blocking → Major → Suggestion → Style. Each issue
+   keeps its ID and focus tag. A merged issue MUST list the ID from each reviewer and combine
+   their content.

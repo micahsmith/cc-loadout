@@ -8,12 +8,12 @@ Bootstrap the Claude Code environment by changing the global settings (by defaul
 `$CLAUDE_CONFIG_DIR/settings.json`, or `$HOME/.claude/settings.json` if `CLAUDE_CONFIG_DIR` is not
 set).
 
-## What it does
+## What It Does
 
 1. Creates a custom status line. For example, the status line renders as follows on branch
    `feat/new-widget`, with Opus 4.8 selected and 6% of context used:
 
-   ```
+   ```text
    Opus 4.8 (1M) | 6% (64K) | feat/new-widget
    ```
 

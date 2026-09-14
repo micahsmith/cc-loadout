@@ -26,13 +26,13 @@ questions from the codebase before asking the user.
   - Address decisions that have broader implications first and keep minor decisions to the end.
   - Only resolve decisions that change the outcome. Be relentless about alignment, but stop short
     of exhaustive interrogation.
-- **The user ends the interview:**
+- **Let the user end the interview:**
   - You MAY inform the user when you think the interview is done.
   - The user MAY end the interview at any time.
   - Once the interview is over, provide an overview of where things stand. Note anything that
     remains uncertain or unsettled.
 
-## Knowing when you are done
+## Knowing When You Are Done
 
 You are aligned when you can state four things and the user agrees with all of them:
 
@@ -47,7 +47,7 @@ with their trade-offs and your recommendation. The user makes the choice; do NOT
 When you believe you are there, play back the full picture in your own words and ask the user to
 confirm or correct it. Alignment is their agreement, not your assumption.
 
-## What happens next
+## What Happens Next
 
 Nothing is mandated. The shared understanding is the deliverable. That understanding may become
 a written spec, a design doc, an implementation plan, or direct work. It may also stay as agreed

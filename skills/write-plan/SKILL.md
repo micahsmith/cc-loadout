@@ -1,18 +1,18 @@
 ---
 name: write-plan
-description: Create an implementation plan. The created plan is self-executing, in that it encodes instructions on how to execute and a completion sentinel in order to facilitate use with a loop. Use this to break down a specification or design into concrete chunks of work.
+description: Create an implementation plan that an agent loop can execute on its own. The plan includes instructions for running it and a completion sentinel that the loop detects. Use it to break a spec or design into concrete chunks of work.
 disable-model-invocation: true
 ---
 
-Create an implementation plan from a specification, or from a design given in the conversation.
-Write the plan as an ordered set of tracer-bullet slices. A tracer-bullet slice cuts through every
-layer the feature touches. Each slice is small enough to build and verify on its own, and complete
-enough to demonstrate working behavior end to end.
+Create an implementation plan from a spec, or from a design given in the conversation. Write the
+plan as an ordered set of tracer-bullet slices. A tracer-bullet slice cuts through every layer the
+feature touches. Each slice is small enough to build and verify on its own, and complete enough to
+demonstrate working behavior end to end.
 
 The plan MUST be self-contained, because an agent loop will execute it. An agent loop runs an agent
-repeatedly against a stated goal until the goal is judged complete. Assume that no further context,
-skills, or conversation will be available while the plan runs. The loop reads only the conversation
-transcript, so every plan MUST end with a literal completion sentinel that the loop can detect.
+repeatedly until a stated goal is judged complete. Assume no other context, skills, or conversation
+is available while the plan runs. The loop reads only the conversation transcript. So every plan
+MUST end with a literal completion sentinel that the loop can detect.
 
 Every plan therefore encodes **decisions**, **slices**, **tests**, and an **end condition**.
 
@@ -21,8 +21,8 @@ executed successfully. Leave most implementation to the executing agent. The exe
 code. The plan constrains only the choices that are costly to get wrong or that would drift from the
 agreed design.
 
-A full specification file is the preferred input, but it is NOT REQUIRED. If you lack the context to
-create a plan, use `/brainstorm` and `/write-spec` first.
+A full spec file is the preferred input, but it is NOT REQUIRED. If you lack the context to create
+a plan, use `/brainstorm` and `/write-spec` first.
 
 ## Process
 
@@ -42,7 +42,7 @@ create a plan, use `/brainstorm` and `/write-spec` first.
 A plan has four parts:
 
 1. **Header.** The header includes the feature name, a one-sentence statement of the goal, a link to
-   the specification (if it exists), and the slice index with ordering.
+   the spec (if it exists), and the slice index with ordering.
 2. **Execution Protocol.** The standardized block (see "Execution Protocol").
 3. **Slices.** The work broken down into tracer-bullet style chunks.
 4. **Completion Sentinel.** The last part of the plan is the completion report template (see
@@ -53,36 +53,38 @@ A plan has four parts:
 Write this block into every plan verbatim. The block tells the executing agent how to run the plan
 inside a loop.
 
-> ## How To Execute This Plan
->
-> You are to implement the plan presented here. Do your work in a worktree. Dispatch each slice of
-> work to a fresh subagent if possible. Prove each slice with surfaced test output. Stop when you
-> emit the completion report.
->
-> 1. **Worktree.** Do all work in a git worktree (if worktrees are available) named after this plan
->    file.
-> 2. **Sequential Slices in Order.** Follow the ordering for slices. You MUST NOT start a slice if
->    the slices it is blocked by have not finished verification. Independent slices MAY run in
->    parallel ONLY if each runs in its own worktree. Independent worktrees MUST be merged back into
->    the main worktree once complete.
-> 3. **Delegate Slices to Subagents.** Each subagent MUST receive ONLY this execution protocol and
->    details on the slice it is implementing (the plan file identifier and the slice identifier).
->    Keep context windows small.
-> 4. **TDD.** Use red/green/refactor. Demonstrate failure of the test first, write the minimum
->    implementation to make it pass, and then demonstrate success. Lastly, refactor and iterate.
-> 5. **Surface Proof.** Each subagent MUST report test results and the checkpoint status for the
->    slice. You MUST include this proof in the main conversation so that completion is evaluable.
-> 6. **Terminate.** When every slice checkpoint is verified, run the full test suite, exhibit that
->    all tests pass, and print the completion report verbatim.
+```markdown
+## How To Execute This Plan
+
+You are to implement the plan presented here. Do your work in a worktree. Dispatch each slice of
+work to a fresh subagent if possible. Prove each slice with surfaced test output. Stop when you
+emit the completion report.
+
+1. **Worktree.** Do all work in a git worktree (if worktrees are available) named after this plan
+   file.
+2. **Sequential Slices in Order.** Follow the ordering for slices. Start a slice ONLY after every
+   slice that blocks it has passed verification. Independent slices MAY run in parallel ONLY if
+   each runs in its own worktree. Independent worktrees MUST be merged back into the main worktree
+   once complete.
+3. **Delegate Slices to Subagents.** Each subagent MUST receive ONLY this execution protocol and
+   details on the slice it is implementing (the plan file path and the slice title). Keep context
+   windows small.
+4. **TDD.** Use red/green/refactor. Demonstrate failure of the test first, write the minimum
+   implementation to make it pass, and then demonstrate success. Lastly, refactor and iterate.
+5. **Surface Proof.** Each subagent MUST report test results and the checkpoint status for the
+   slice. You MUST include this proof in the main conversation so that completion is evaluable.
+6. **Terminate.** When every slice checkpoint is verified, run the full test suite, exhibit that
+   all tests pass, and print the completion report verbatim.
+```
 
 ### Slices
 
 Write slices in order so that each one builds on its predecessors. Once its blockers are complete,
 each slice MUST be executable on its own.
 
-If the codebase needs to be softened before adding feature slices, include a **prefactoring** slice
-to facilitate easier work for future iterations. ONLY include this prefactoring slice when high
-value.
+If the current code would make the feature slices hard to build, add a **prefactoring** slice first.
+A prefactoring slice restructures code without changing its behavior. Include this slice ONLY when
+its value is high.
 
 Each slice MUST contain:
 
@@ -104,13 +106,15 @@ Each slice MUST contain:
 End the plan with the report the executor prints only when all slices are verified. This sentinel
 allows loops to detect completion:
 
-> ## Completion Report
->
-> Print this ONLY when all slice checkpoints are verified:
->
-> - One line per slice: its title, ✅, and the checkpoint proof.
-> - The full test suite command and its output.
-> - Final line verbatim: `PLAN COMPLETE: plan-<date>.md`
+```markdown
+## Completion Report
+
+Print this ONLY when all slice checkpoints are verified:
+
+- One line per slice: its title, ✅, and the checkpoint proof.
+- The full test suite command and its output.
+- Final line verbatim: `PLAN COMPLETE: plan-<date>.md`
+```
 
 ## Output
 
@@ -118,17 +122,17 @@ allows loops to detect completion:
 
 Resolve the base directory for the plan as follows:
 
-1. **Specification Directory.** If a specification for this work exists, write the plan into the
-   SAME directory as the specification.
-2. **Conventional Specification Directory.** If a directory conventionally used for plans or
-   specifications already exists (`plans/`, `specs/`, `prds/`, or similar), use it.
+1. **Spec Directory.** If a spec for this work exists, write the plan into the SAME directory as the
+   spec.
+2. **Conventional Spec Directory.** If a directory conventionally used for plans or specs already
+   exists (`plans/`, `specs/`, `prds/`, or similar), use it.
 3. **Scratch Directory.** Otherwise, if an existing scratch directory is present at the repository
    root (`tmp/`, `temp/`, `scratch/`, or similar, especially if git-ignored), use it.
 4. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
-If there is no specification file to be sibling to the plan, create a new directory whose name is at
-most four words describing the work to be done in kebab-case, and write the plan there.
+If no spec exists, create a new directory inside the resolved base directory. Name the new directory
+in kebab-case, using at most four words that describe the work. Write the plan there.
 
 Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
@@ -152,7 +156,7 @@ Before the final report, scan the draft and fix problems inline:
 - Test cases without concrete and observable results.
 - Missing edge/error cases.
 - Cyclic or contradictory slice ordering.
-- Decision anchors that contradict the specification.
+- Decision anchors that contradict the spec.
 - Missing execution protocol or completion sentinel.
 
 The user will review the file conversationally.
