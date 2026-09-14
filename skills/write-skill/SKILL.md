@@ -5,12 +5,12 @@ description: Create a new skill. Provides guidance on progressive disclosure and
 
 ## Process
 
-1. **Gather Requirements**:
+1. **Gather Requirements.**
    - Intention: what task is the user solving with the skill?
    - Scope: what are the core use cases?
    - You MAY skip this step if the conversation already contains requirements.
 
-2. **Write Skill**:
+2. **Write Skill.**
    - Draft SKILL.md and any needed additional files.
    - Use progressive disclosure. Keep SKILL.md short and move detail into files that the agent
      reads only when it needs them.
@@ -22,9 +22,9 @@ description: Create a new skill. Provides guidance on progressive disclosure and
    - Use simple language. Avoid jargon unless it is needed for clarity.
    - Write more ONLY when extra words add clarity.
 
-3. **Review**:
+3. **Review.**
    - Provide the user with your draft and get feedback.
-   - Iterate between drafting and feedback until user gives final approval.
+   - Iterate between drafting and feedback until the user gives final approval.
 
 ## Structure
 
@@ -32,7 +32,7 @@ description: Create a new skill. Provides guidance on progressive disclosure and
 
 Use the following for the directory structure of the SKILL.md and any supporting files:
 
-```
+```text
 skill-name/
 ├── EXAMPLES.md     # Optional
 ├── <REFERENCE>.md  # Optional
@@ -47,8 +47,9 @@ The description MUST make plain what the skill does and when to use it. Note any
 triggers.
 
 You MUST conform to these criteria:
-- 1024 character maximum.
-- 3 sentence maximum.
+
+- Use at most 1024 characters.
+- Use at most 3 sentences.
 - Use simple language.
 - Be concise.
 

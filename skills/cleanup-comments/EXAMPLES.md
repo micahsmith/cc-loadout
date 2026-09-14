@@ -1,6 +1,6 @@
 # Worked Examples
 
-Each case shows a comment as found and what it should become.
+Each case shows a comment as found and what it SHOULD become.
 
 ## Restatement
 
@@ -59,7 +59,7 @@ DEFAULT_FEE = 250
 ```
 
 This looks like a restatement but isn't. If it were deleted, the constant's unit would be lost. The
-comment should be retained.
+comment MUST be retained.
 
 ## Cross-File Sync Pointer
 
@@ -69,7 +69,7 @@ comment should be retained.
 const STATUS_LABELS = { open: 'Open', closed: 'Closed' }
 ```
 
-The pointer is a valuable warning to future editors. The comment should be retained.
+The pointer is a valuable warning to future editors. The comment MUST be retained.
 
 ## Doc Comment: Over-Applied
 

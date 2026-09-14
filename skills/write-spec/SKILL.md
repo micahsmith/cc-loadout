@@ -1,13 +1,13 @@
 ---
 name: write-spec
-description: Create a specification detailing the design decisions of a feature. This spec includes what the feature is, why it is being built, and the high-level technical decisions that will constrain implementation.
+description: Create a spec detailing the design decisions of a feature. This spec includes what the feature is, why it is being built, and the high-level technical decisions that will constrain implementation.
 disable-model-invocation: true
 ---
 
-Create a specification artifact that records key information: *what* will be built, *why* it is
-being built, and any architectural decisions that constrain implementation. The spec SHOULD be
-stable and readable. Do NOT include file paths, code, task sequencing, or implementation details,
-because these items are prone to rot.
+Create a spec file that records key information: **what** will be built, **why** it is being
+built, and any architectural decisions that constrain implementation. The spec SHOULD be stable and
+readable. Do NOT include file paths, code, task sequencing, or implementation details, because
+these items are prone to rot.
 
 Default behavior is to synthesize the spec from the current conversation and exploration of the
 codebase. Interview the user to fill in gaps. If there is little to no context, use `/brainstorm`.
@@ -19,9 +19,10 @@ codebase. Interview the user to fill in gaps. If there is little to no context, 
    run an exhaustive exploration.
 2. **Draft.** Write a draft of each section (see "Template").
 3. **Interview & Iterate.** Examine the draft and identify missing information or weak points. If
-   a required section is missing or anemic, interview the user. Ask one question at a time until all
-   missing information has been filled. Do NOT run a full interview.
-4. **Write.** Create the specification file (see "Output").
+   a required section is missing or anemic, interview the user. Ask one question at a time. Be
+   comprehensive: fill every gap that would change the spec. Do NOT ask a long series of questions
+   about minor details.
+4. **Write.** Create the spec file (see "Output").
 5. **Review.** Review the file and fix any remaining issues inline (see "Self-Review").
 6. **Report.** Report the spec file path and a short summary of its contents.
 
@@ -58,7 +59,7 @@ Resolve the base directory for the spec as follows:
 3. **Fallback.** Otherwise, use the repository root, or the current working directory if not in
    a repository.
 
-Do NOT use `mktemp` or any system temp directory.
+Use `mktemp` or a system temp directory ONLY inside a script bundled with this skill.
 
 ### Filename
 
@@ -68,10 +69,10 @@ output of `date +%F`.
 
 ### Splitting
 
-The default SHOULD be a single file. If the specification grows very large (>1500 lines), extract
+The default SHOULD be a single file. If the spec grows very large (>1500 lines), extract
 self-contained appendices (contract details, schemas, or acceptance criteria) into sibling files
-that the primary specification references. Use `spec-<date>-<content>.md`. Do NOT pre-split into
-per-task files.
+that the primary spec references. Use `spec-<date>-<content>.md`. Do NOT pre-split into per-task
+files.
 
 ## Self-Review
 

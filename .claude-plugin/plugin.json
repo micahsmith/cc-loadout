@@ -1,10 +1,8 @@
 {
   "name": "code-skillset",
-  "description": "custom library of skills for writing code",
+  "description": "custom library of skills and hooks for writing code",
   "author": {
     "name": "micah smith"
   },
-  "category": "development",
-  "version": "0.0.1",
   "homepage": "https://github.com/micahsmith/cc-loadout"
 }

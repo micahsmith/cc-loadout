@@ -8,14 +8,14 @@ Bootstrap the Claude Code environment by changing the global settings (by defaul
 `$CLAUDE_CONFIG_DIR/settings.json`, or `$HOME/.claude/settings.json` if `CLAUDE_CONFIG_DIR` is not
 set).
 
-## What it does
+## What It Does
 
 1. Creates a custom status line. For example, the status line renders as follows on branch
-`feat/new-widget`, with Opus 4.8 selected and 6% of context used:
+   `feat/new-widget`, with Opus 4.8 selected and 6% of context used:
 
-```
-Opus 4.8 (1M) | 6% (64K) | feat/new-widget
-```
+   ```text
+   Opus 4.8 (1M) | 6% (64K) | feat/new-widget
+   ```
 
 2. Blocks the use of `AskUserQuestion`, forcing text-only interactions.
 
@@ -26,9 +26,9 @@ Opus 4.8 (1M) | 6% (64K) | feat/new-widget
 2. Run the installer (merges the changes into existing settings with an initial backup of the
    current settings):
 
-```sh
-bash scripts/install.sh
-```
+   ```sh
+   bash scripts/install.sh
+   ```
 
 3. Report success or failure. If installation failed, explain the cause. If the user must restart
    to see the changes, recommend it.

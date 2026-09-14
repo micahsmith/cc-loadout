@@ -14,11 +14,13 @@ over an elegant one.
 2. Make one and only one claim per sentence.
 3. Begin a sentence with what the reader already knows. End it with what is new.
 4. Use one term for one thing, and reuse that term everywhere.
-5. Prefer the affirmative form when the meaning is unchanged. Write "missing" instead of "not present".
+5. Prefer the affirmative form when the meaning is unchanged. Write "missing" instead of
+   "not present".
 6. Use at most one negative in a statement.
 7. Repeat the noun when "it", "this", or "that" refers back more than a few words.
 8. Choose the more common word. Define a technical term at first use, or replace it.
-9. Name the actor and the action. Write "the check failed" instead of "a failure of the check occurred".
+9. Name the actor and the action. Write "the check failed" instead of "a failure of the check
+   occurred".
 10. Name the relation between sentences with "because", "however", or "so".
 11. State conclusions first. Provide support after.
 12. Give every item in a list the same grammatical shape.
