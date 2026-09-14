@@ -20,7 +20,6 @@ Hooks that ship as part of the plugin are located in `hooks`.
 
 - Each skill is located at `skills/<name>/SKILL.md`. Skills MAY use progressive disclosure in order
   to reduce complexity.
-- New skills should be added to `.claude-plugin/plugin.json` and `README.md`.
 - Skills that write file artifacts MUST try to resolve save location using the same convention.
   These skills MUST NOT use `mktemp` or any system temp directory. Instructions on file path
   resolution should be duplicated inline for any skill that writes file. Any change to this

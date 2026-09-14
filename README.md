@@ -34,6 +34,7 @@ These guides are injected at `SessionStart` and `SubagentStart`.
 |-------|---------|
 | `bootstrap` | Apply preferred global settings. |
 | `brainstorm` | Interview session to achieve alignment on design and requirements prior to work. |
+| `cleanup-comments` | Delete unnecessary code comments and tighten comments that remain. |
 | `deep-review` | Comprehensive code review with a consolidated report artifact. |
 | `handoff` | Compact the conversation into a handoff artifact. |
 | `write-plan` | Write a self-executing implementation plan. |
