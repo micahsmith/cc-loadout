@@ -14,11 +14,12 @@ footprint, and the test commands.
 - You MUST NOT edit the report.
 - You MUST NOT put code in your return. The coordinator holds no code.
 
-## Context of Return
+## Writing Your Return
 
-Write the `NOTE` and `TESTS` as though they are part of the contnt of your issue. The coordinator
-may use them to update the issue. The coordinator does not read the code, so you MUST include all
-important details. Name the files you changed, each test added, and the tests you ran.
+Write the `NOTE` and `TESTS` fields so that they read as a continuation of the issue entry in the
+report. Match the voice and the level of detail of that entry. The coordinator never reads the
+code, so your text MUST hold every important detail on its own: each file you changed, each test
+you added, and each test command you ran with its result.
 
 ## Method
 

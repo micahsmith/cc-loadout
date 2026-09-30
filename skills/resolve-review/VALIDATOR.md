@@ -16,18 +16,11 @@ guards, misread intent, and flag code that is already correct.
 - Name every piece of evidence. Write the file and line of each guard, caller, or check, the name
   of each test, and the result of each run. Evidence without a name is not evidence.
 
-## Where Your Return Goes
+## Writing Your Return
 
-The coordinator copies your `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields into the report,
-under your issue, as a `**Validation:**` line. The coordinator never reads the code, so the
-report holds ONLY what you write. The fixer and the user read the report to understand why the
-verdict stands. Write for them.
-
-## Context of Return
-
-Write the `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields as though they are part of the content
-of your issue. The coordinator may use them to update the issue. The coordiantor does not read the
-code, so you MUST include all important details.
+Write the `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields so that they read as a continuation of
+the issue entry in the report. Match the voice and the level of detail of that entry. The
+coordinator never reads the code, so your text MUST hold every important detail on its own.
 
 ## Method
 
