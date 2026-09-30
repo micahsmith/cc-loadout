@@ -8,16 +8,12 @@
     {
       "name": "code-skillset",
       "displayName": "code skillset",
-      "description": "custom library of skills for writing code",
+      "description": "custom library of skills and hooks for writing code",
       "author": {
         "name": "micah smith"
       },
       "category": "development",
-      "version": "0.0.1",
-      "source": {
-        "source": "github",
-        "repo": "micahsmith/cc-loadout"
-      },
+      "source": "./",
       "homepage": "https://github.com/micahsmith/cc-loadout"
     }
   ]

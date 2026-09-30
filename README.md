@@ -1,39 +1,52 @@
 # cc-loadout
 
-Skills and hooks library for Claude Code and other agents. 
+Skills and hooks library for Claude Code and other agents.
 
 ## Installation
 
-The easiest installation method is just to prompt (as it doesn't require specific ssh or git
-configuration):
+Give the prompt below to your agent. Use the same prompt to install, update, or reinstall. Each run
+replaces any earlier copy, so every run ends in the same state.
 
 ```text
-Fetch https://github.com/micahsmith/cc-loadout over HTTPS, install it as a plugin marketplace, and
-install the `code-skillset` plugin.
-```
+Install the `code-skillset` plugin from https://github.com/micahsmith/cc-loadout. Follow these
+steps in order:
 
-If `ssh` is available or `git` is setup to use HTTPS, these commands work:
-
-```sh
-/plugin marketplace add micahsmith/cc-loadout
-/plugin install code-skillset@cc-loadout
+1. Fetch the latest commit of the default branch over HTTPS. Assume you do not have access to SSH.
+2. Remove every earlier installation of `code-skillset`, including cached copies and any
+   `cc-loadout` marketplace entry. Leave everything else in place.
+3. Install at the user level, using the native install mechanism of the agent you are running in:
+   - If the agent supports Claude Code plugin marketplaces, add the repository as the `cc-loadout`
+     marketplace by its HTTPS URL. Then install `code-skillset@cc-loadout`. This step also installs
+     the hooks.
+   - Otherwise, install each directory under `skills/` as a skill. Keep each directory name and its
+     contents unchanged. Then register the hooks in `hooks/` with the agent's equivalent of a
+     session-start hook. If the agent has no equivalent, skip the hooks. Ask for confirmation before
+     editing any global instruction file.
+4. Confirm that every skill under `skills/` is installed.
+5. Report the install location, what was installed, what was skipped, and whether the agent needs to
+   be restarted.
 ```
 
 ## Hooks
 
-| Hook | Purpose |
-|------|---------|
-| `technical-writing` | Rules for technical writing that aim to improve comprehension and clarity. |
+The hooks add these guides to the context at the start of every session and every subagent.
+
+| Guide | Purpose |
+| --- | --- |
+| `how-to-write-comments` | Rules for writing code comments and doc comments. |
+| `how-to-write-prose` | Rules for technical writing that improve clarity and comprehension. |
 
 ## Skills
 
 | Skill | Purpose |
-|-------|---------|
+| --- | --- |
 | `bootstrap` | Apply preferred global settings. |
-| `brainstorm` | Interview session to achieve alignment on design and requirements prior to work. |
-| `deep-review` | Comprehensive code review with a consolidated report artifact. |
-| `handoff` | Compact the conversation into a handoff artifact. |
+| `brainstorm` | Interview the user to reach alignment on design and requirements before work begins. |
+| `cleanup-comments` | Delete unnecessary code comments and tighten the comments that remain. |
+| `deep-review` | Review a branch in depth and write a consolidated report. |
+| `handoff` | Compact the conversation into a handoff file. |
+| `resolve-review` | Validate and fix the issues in a `deep-review` report. |
 | `write-adr` | Record an architecture decision as a numbered, indexed ADR. |
 | `write-plan` | Write a self-executing implementation plan. |
-| `write-spec` | Write a specification artifact. |
 | `write-skill` | Write a new skill. |
+| `write-spec` | Write a spec. |
