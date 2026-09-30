@@ -13,6 +13,21 @@ guards, misread intent, and flag code that is already correct.
   "Temporary Test").
 - You MUST NOT put code in your return. The coordinator holds no code.
 - Ground every statement in code you have read or in a test you have run.
+- Name every piece of evidence. Write the file and line of each guard, caller, or check, the name
+  of each test, and the result of each run. Evidence without a name is not evidence.
+
+## Where Your Return Goes
+
+The coordinator copies your `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields into the report,
+under your issue, as a `**Validation:**` line. The coordinator never reads the code, so the
+report holds ONLY what you write. The fixer and the user read the report to understand why the
+verdict stands. Write for them.
+
+## Context of Return
+
+Write the `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields as though they are part of the content
+of your issue. The coordinator may use them to update the issue. The coordiantor does not read the
+code, so you MUST include all important details.
 
 ## Method
 
@@ -108,8 +123,8 @@ JUDGMENT: mechanical | choice | design
 RISK: low | medium | high
 FOOTPRINT: <comma-separated file paths>
 GROUP: <IDs of issues with the same root cause> | none
-REASON: <one or two sentences: the evidence for the verdict and the risk>
-FIX: <one to three sentences: the fix to apply>
+REASON: <three to five sentences: the evidence for the verdict and the risk; name each file, line, and test>
+FIX: <one to three sentences: the fix to apply, with the files it edits named>
 OPTIONS:
   A. <one sentence>
   B. <one sentence>
