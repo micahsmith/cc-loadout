@@ -45,6 +45,7 @@ The hooks add these guides to the context at the start of every session and ever
 | `cleanup-comments` | Delete unnecessary code comments and tighten the comments that remain. |
 | `deep-review` | Review a branch in depth and write a consolidated report. |
 | `handoff` | Compact the conversation into a handoff file. |
+| `resolve-review` | Validate and fix the issues in a `deep-review` report. |
 | `write-plan` | Write a self-executing implementation plan. |
 | `write-skill` | Write a new skill. |
 | `write-spec` | Write a spec. |
