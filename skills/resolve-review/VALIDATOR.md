@@ -13,6 +13,14 @@ guards, misread intent, and flag code that is already correct.
   "Temporary Test").
 - You MUST NOT put code in your return. The coordinator holds no code.
 - Ground every statement in code you have read or in a test you have run.
+- Name every piece of evidence. Write the file and line of each guard, caller, or check, the name
+  of each test, and the result of each run. Evidence without a name is not evidence.
+
+## Writing Your Return
+
+Write the `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields so that they read as a continuation of
+the issue entry in the report. Match the voice and the level of detail of that entry. The
+coordinator never reads the code, so your text MUST hold every important detail on its own.
 
 ## Method
 
@@ -108,8 +116,8 @@ JUDGMENT: mechanical | choice | design
 RISK: low | medium | high
 FOOTPRINT: <comma-separated file paths>
 GROUP: <IDs of issues with the same root cause> | none
-REASON: <one or two sentences: the evidence for the verdict and the risk>
-FIX: <one to three sentences: the fix to apply>
+REASON: <three to five sentences: the evidence for the verdict and the risk; name each file, line, and test>
+FIX: <one to three sentences: the fix to apply, with the files it edits named>
 OPTIONS:
   A. <one sentence>
   B. <one sentence>

@@ -113,7 +113,9 @@ Then spawn one validator per `open` issue. Give each validator:
 - The test commands. If test runs cannot happen at once, tell the validator to run no tests.
 
 Record each verdict, judgment, risk, and footprint in the triage table as the validator returns.
-The footprint is the list of files the fix touches.
+The footprint is the list of files the fix touches. Then add a validation line to the issue (see
+"Tracking"). The validation line is the only place in the report that holds the validator's
+evidence.
 
 A validator MAY write a temporary test when reading the code cannot settle an issue. Every temporary
 test has `rrtmp` in its file name, and the validator deletes it before returning. A validator that
@@ -163,7 +165,8 @@ Set each issue to `in-progress` before its fixer starts. Give each fixer:
 - The footprint of the unit, plus the "partial fix may exist" note if the row has one.
 - The test commands. If test runs cannot happen at once, tell the fixer to run no tests.
 
-Update the triage table as each fixer returns. Handle a `blocked` return by its cause:
+Update the triage table as each fixer returns, and add a resolution line to each issue that
+becomes `fixed` or `blocked` (see "Tracking"). Handle a `blocked` return by its cause:
 
 - **The fix needs a file outside the footprint.** Add the file to the footprint. Set the issue to
   `queued` for a later wave.
@@ -233,15 +236,48 @@ Add the table as its own section directly after the Summary section of the repor
 - **Files Touched** holds the footprint until the fixer returns. Then the column holds the files
   that the fixer changed.
 - **Note** holds what a fresh session needs to continue: the root-cause group, the validator's fix,
-  the chosen option, or the reason for a block. Keep each note to one or two sentences.
+  the chosen option, or the reason for a block. Keep each note to one or two sentences. The
+  validation line holds the evidence, so the note MUST NOT repeat the evidence.
+
+### Validation Line
+
+Add a validation line to an issue as soon as its validator returns. Write the line as a bullet
+directly after the `**Location:**` bullet of the issue. The line holds the verdict, then the
+validator's `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields. Include ONLY the fields that the
+validator returned:
+
+```markdown
+- **Validation:** rejected — The reviewer missed the guard in `api/users.js:42`, which returns
+  early when `id` is empty. The only caller, `routes/users.js:18`, passes a validated ID. A
+  temporary test with an empty ID hit the guard and returned 400.
+```
+
+```markdown
+- **Validation:** confirmed-alt — `cache/store.js:30` adds entries and never removes them, so the
+  map grows without bound. No caller clears the cache. Fix: expire entries in `cache/store.js`.
+  Options: (A) a TTL per entry, or (B) an LRU cap. Recommend A, because every caller already
+  passes a timestamp.
+```
+
+You MAY rewrite the validator's text for clarity, because you know the context of the issue. You
+MUST keep every piece of evidence the validator named: each file, line, caller, test, and result.
+Do NOT shorten the text to one sentence.
 
 ### Resolution Line
 
 Add a resolution line to an issue when its status becomes `fixed`, `rejected`, `unclear`, `blocked`,
-or `skipped`. Write the line as a bullet directly after the `**Location:**` bullet of the issue:
+or `skipped`. Write the line as a bullet directly after the `**Validation:**` bullet of the issue,
+or after the `**Location:**` bullet if the issue has no validation line. The line holds the status,
+then the detail for that status:
+
+- For `fixed` or `blocked`, the fixer's `NOTE` and `TESTS` fields.
+- For `skipped`, the reason the user gave.
+- For `rejected` or `unclear`, nothing more, because the validation line holds the evidence.
 
 ```markdown
-- **Resolution:** fixed — The query now uses bound parameters. Regression test added.
+- **Resolution:** fixed — The query now uses bound parameters. Regression test added in
+  `test/users.test.js`. Tests: `npm test -- test/users.test.js` passed.
 ```
 
-Replace the line if the status changes later.
+The rewrite rule for the validation line applies here too: you MAY rewrite for clarity, and you
+MUST keep every file, test command, and result. Replace the line if the status changes later.

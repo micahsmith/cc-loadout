@@ -14,6 +14,13 @@ footprint, and the test commands.
 - You MUST NOT edit the report.
 - You MUST NOT put code in your return. The coordinator holds no code.
 
+## Writing Your Return
+
+Write the `NOTE` and `TESTS` fields so that they read as a continuation of the issue entry in the
+report. Match the voice and the level of detail of that entry. The coordinator never reads the
+code, so your text MUST hold every important detail on its own: each file you changed, each test
+you added, and each test command you ran with its result.
+
 ## Method
 
 1. **Read.** Read the entry for each of your issues in the report. Then read the code in your
@@ -49,5 +56,5 @@ ID: <issue ID>
 STATUS: fixed | blocked
 FILES: <comma-separated paths of the files you changed or created>
 TESTS: <command> — passed | failed | not run (<reason>)
-NOTE: <one or two sentences: what changed, or why the issue is blocked>
+NOTE: <two to four sentences: what changed and where, or why the issue is blocked>
 ```
