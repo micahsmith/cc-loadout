@@ -154,6 +154,9 @@ is unclear.
 **Issue Statement:** What is the problem and why is it a problem.
 
 **Proposed Solution:** How the problem could be resolved, and why the proposed solution fixes it.
+Propose ONE solution. If other fixes are also valid, name them in a separate sentence that starts
+with "Alternatives:", joined by "or". A list of steps means steps that all happen; never use a
+list for alternatives.
 
 **Confidence Note:** (REQUIRED when Confidence is Medium or Low) Why confidence was not High and
 what ambiguity or intent needs to be resolved in order to confirm status.

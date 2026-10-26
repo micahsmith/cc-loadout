@@ -183,8 +183,19 @@ The batch has three parts. Omit any empty part.
 
 1. **Approvals.** Every `mechanical` issue with `high` risk. State the fix and the risk for each.
    The user MAY approve them all with one reply.
-2. **Choices.** Every `choice` issue. List the options, and mark the option that the validator
-   recommends.
+2. **Choices.** Every `choice` issue. Present each choice in this shape, so that the user can
+   see that the options exclude each other:
+
+   ```markdown
+   **COR-2** Cache never expires. Pick one:
+   - **A.** Expire each entry after a TTL. Simple, but stale entries live until the TTL ends.
+   - **B.** Cap the map with an LRU. Bounded memory, but hot entries can be evicted under load.
+
+   Recommend A, because every caller already passes a timestamp.
+   ```
+
+   Letter ONLY options that exclude each other. Never letter steps that must all happen. Each
+   option states the fix and its trade-off.
 3. **Not Fixed.** Every `rejected`, `unclear`, and `blocked` issue, each with its reason. The user
    MAY override any of them.
 
@@ -237,38 +248,39 @@ Add the table as its own section directly after the Summary section of the repor
   that the fixer changed.
 - **Note** holds what a fresh session needs to continue: the root-cause group, the validator's fix,
   the chosen option, or the reason for a block. Keep each note to one or two sentences. The
-  validation line holds the evidence, so the note MUST NOT repeat the evidence.
+  validation line holds the decisive evidence, so the note MUST NOT repeat it.
 
 ### Validation Line
 
 Add a validation line to an issue as soon as its validator returns. Write the line as a bullet
-directly after the `**Location:**` bullet of the issue. The line holds the verdict, then the
-validator's `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields. Include ONLY the fields that the
-validator returned:
+after the last part of the issue: after **Confidence Note** when present, otherwise after
+**Proposed Solution**. The reader then meets the context and the problem before the verdict.
+
+The line is a summary, not the validator's full return. It holds the verdict, then one or two
+sentences that name the evidence that decided the verdict: the one guard, caller, or test that
+settled it. When the verdict is `confirmed-alt`, add the fix in one sentence. When the judgment is
+`choice`, add the lettered options and the recommendation, each in one sentence:
 
 ```markdown
-- **Validation:** rejected — The reviewer missed the guard in `api/users.js:42`, which returns
-  early when `id` is empty. The only caller, `routes/users.js:18`, passes a validated ID. A
-  temporary test with an empty ID hit the guard and returned 400.
+- **Validation:** rejected — The guard at `api/users.js:42` returns early when `id` is empty, and
+  a temporary test with an empty ID returned 400.
 ```
 
 ```markdown
-- **Validation:** confirmed-alt — `cache/store.js:30` adds entries and never removes them, so the
-  map grows without bound. No caller clears the cache. Fix: expire entries in `cache/store.js`.
-  Options: (A) a TTL per entry, or (B) an LRU cap. Recommend A, because every caller already
-  passes a timestamp.
+- **Validation:** confirmed-alt — `cache/store.js:30` adds entries and nothing removes them. Fix:
+  expire entries in `cache/store.js`. Pick one: (A) a TTL per entry, or (B) an LRU cap. Recommend
+  A, because every caller already passes a timestamp.
 ```
 
-You MAY rewrite the validator's text for clarity, because you know the context of the issue. You
-MUST keep every piece of evidence the validator named: each file, line, caller, test, and result.
-Do NOT shorten the text to one sentence.
+Cut the validator's narrative. Keep the names of the files, lines, and tests that the summary
+cites, so that a reader can check the verdict.
 
 ### Resolution Line
 
 Add a resolution line to an issue when its status becomes `fixed`, `rejected`, `unclear`, `blocked`,
 or `skipped`. Write the line as a bullet directly after the `**Validation:**` bullet of the issue,
-or after the `**Location:**` bullet if the issue has no validation line. The line holds the status,
-then the detail for that status:
+or in the same place as a validation line if the issue has none. The line holds the status, then
+the detail for that status:
 
 - For `fixed` or `blocked`, the fixer's `NOTE` and `TESTS` fields.
 - For `skipped`, the reason the user gave.
@@ -279,5 +291,5 @@ then the detail for that status:
   `test/users.test.js`. Tests: `npm test -- test/users.test.js` passed.
 ```
 
-The rewrite rule for the validation line applies here too: you MAY rewrite for clarity, and you
-MUST keep every file, test command, and result. Replace the line if the status changes later.
+You MAY rewrite the fixer's text for clarity. You MUST keep every file, test command, and result.
+Replace the line if the status changes later.
