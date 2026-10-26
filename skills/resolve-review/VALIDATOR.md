@@ -19,8 +19,12 @@ guards, misread intent, and flag code that is already correct.
 ## Writing Your Return
 
 Write the `REASON`, `FIX`, `OPTIONS`, and `RECOMMEND` fields so that they read as a continuation of
-the issue entry in the report. Match the voice and the level of detail of that entry. The
-coordinator never reads the code, so your text MUST hold every important detail on its own.
+the issue entry in the report. Match the voice of that entry. The coordinator never reads the
+code, so name the evidence that decided your verdict. Lead with that evidence, and leave out the
+steps that did not settle the issue.
+
+`OPTIONS` holds fixes that exclude each other. The user picks one. Never list steps that must all
+happen as options.
 
 ## Method
 
@@ -116,10 +120,10 @@ JUDGMENT: mechanical | choice | design
 RISK: low | medium | high
 FOOTPRINT: <comma-separated file paths>
 GROUP: <IDs of issues with the same root cause> | none
-REASON: <three to five sentences: the evidence for the verdict and the risk; name each file, line, and test>
+REASON: <two to three sentences: the evidence that decided the verdict and the risk; name the file, line, or test>
 FIX: <one to three sentences: the fix to apply, with the files it edits named>
 OPTIONS:
-  A. <one sentence>
-  B. <one sentence>
+  A. <one sentence: the fix, then the trade-off it carries>
+  B. <one sentence: the fix, then the trade-off it carries>
 RECOMMEND: <letter> — <one sentence: why>
 ```
