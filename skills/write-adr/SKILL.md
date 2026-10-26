@@ -32,7 +32,8 @@ Interview the user to fill any gap in context or reasoning.
 Write an ADR ONLY WHEN both conditions hold:
 
 1. **The decision is hard to reverse.**
-2. **The decision carries extensive trade-offs.**
+2. **The decision binds code beyond the component that makes it.** Other modules, services, or
+   teams must conform to the decision, so its trade-offs reach past the code that chose it.
 
 Two kinds of decision usually meet both conditions:
 
