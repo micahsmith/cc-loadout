@@ -1,4 +1,5 @@
 .claude/
+.idea/
 node_modules/
 scratch/
 target/
