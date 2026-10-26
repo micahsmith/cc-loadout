@@ -1,31 +1,68 @@
-# cc-loadout
+# skald
 
-Skills and hooks library for Claude Code and other agents.
+Skald records, versions, and renders design intent for a git repository. This repository also
+holds `code-skillset`, a plugin of skills and hooks for Claude Code and other agents.
 
 ## Installation
 
-Give the prompt below to your agent. Use the same prompt to install, update, or reinstall. Each run
-replaces any earlier copy, so every run ends in the same state.
+Installation takes two steps. First, install the `skald` binary:
+
+```sh
+cargo install --locked --git https://github.com/micahsmith/skald skald
+```
+
+Then run setup:
+
+```sh
+skald setup
+```
+
+Setup installs the Claude Code session hook and the `code-skillset` plugin. Running setup again
+changes nothing. Pass `--no-plugin` to skip the plugin.
+
+The plugin also installs without skald. In Claude Code, add this repository as the `skald`
+marketplace and install the plugin from it:
 
 ```text
-Install the `code-skillset` plugin from https://github.com/micahsmith/cc-loadout. Follow these
-steps in order:
-
-1. Fetch the latest commit of the default branch over HTTPS. Assume you do not have access to SSH.
-2. Remove every earlier installation of `code-skillset`, including cached copies and any
-   `cc-loadout` marketplace entry. Leave everything else in place.
-3. Install at the user level, using the native install mechanism of the agent you are running in:
-   - If the agent supports Claude Code plugin marketplaces, add the repository as the `cc-loadout`
-     marketplace by its HTTPS URL. Then install `code-skillset@cc-loadout`. This step also installs
-     the hooks.
-   - Otherwise, install each directory under `skills/` as a skill. Keep each directory name and its
-     contents unchanged. Then register the hooks in `hooks/` with the agent's equivalent of a
-     session-start hook. If the agent has no equivalent, skip the hooks. Ask for confirmation before
-     editing any global instruction file.
-4. Confirm that every skill under `skills/` is installed.
-5. Report the install location, what was installed, what was skipped, and whether the agent needs to
-   be restarted.
+/plugin marketplace add micahsmith/skald
+/plugin install code-skillset@skald
 ```
+
+Other agents MAY install each directory under `plugin/skills/` as a skill.
+
+## Usage
+
+`skald --help` lists every command. `skald <command> --help` lists the flags of one command.
+
+Output goes to stdout as TOON. The `--json` flag switches it to JSON. Errors are structured and
+also go to stdout. stderr carries diagnostics only.
+
+| Exit code | Meaning |
+| --- | --- |
+| `0` | Success, including no-ops. |
+| `1` | Error. |
+| `2` | Usage error: unknown flag, unknown command, or missing argument. |
+
+These environment variables change where skald reads and writes files:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `SKALD_HOME` | `~/.skald` | The data directory. It holds the store file `skald.db` and the adapter markers. |
+| `CLAUDE_CONFIG_DIR` | `~/.claude` | The Claude Code configuration directory. Setup writes the session hook to its `settings.json`. |
+| `CLAUDE_CODE_PLUGIN_CACHE_DIR` | `plugins` in the Claude Code configuration directory | The directory that holds `installed_plugins.json`, which shows whether the plugin is installed. |
+
+## Layout
+
+| Path | Contents |
+| --- | --- |
+| `Cargo.toml`, `src/` | The `skald` crate and its binary. |
+| `tests/` | Integration tests that run the built binary. |
+| `plugin/` | The `code-skillset` plugin. |
+| `plugin/skills/` | One directory per skill. |
+| `plugin/hooks/` | The session hooks and the guides they print. |
+| `.claude-plugin/marketplace.json` | The `skald` marketplace. Its one entry points at `./plugin`. |
+| `.github/workflows/ci.yml` | CI: the full test suite and a plugin smoke test. |
+| `.github/workflows/release.yml` | Release: on a `v*` tag, builds the binary on Linux and macOS and attaches each to the release. |
 
 ## Hooks
 

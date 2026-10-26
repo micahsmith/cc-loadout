@@ -1,6 +1,21 @@
 ## Overview
 
-This repository is a library of skills for AI agents. There is no build/test capability available.
+This repository holds two things:
+
+- `skald`, a Rust command-line program. The crate is at the repository root: `Cargo.toml`, the
+  program in `src/`, and integration tests in `tests/`.
+- `code-skillset`, a plugin of skills and hooks for AI agents. The plugin is in `plugin/`. The
+  marketplace manifest at `.claude-plugin/marketplace.json` points at it.
+
+The full test suite is:
+
+```sh
+cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test
+```
+
+`skald dev seed --designs <N>` is a test-only command. It adds N data-model designs to the store
+for the current repository, so that tests can measure the store at scale. It is hidden from
+`--help`. It MUST NOT be used outside tests.
 
 ## Style
 
@@ -14,12 +29,12 @@ for writing:
 
 ## Authoring Hooks
 
-Hooks that ship as part of the plugin are located in `hooks`.
+Hooks that ship as part of the plugin are located in `plugin/hooks`.
 
 ## Authoring Skills
 
-- Each skill is located at `skills/<name>/SKILL.md`. Skills MAY use progressive disclosure in order
-  to reduce complexity.
+- Each skill is located at `plugin/skills/<name>/SKILL.md`. Skills MAY use progressive disclosure
+  in order to reduce complexity.
 - Skills that write files MUST try to resolve save location using the same convention. These
   skills MUST use `mktemp` or a system temp directory ONLY inside a bundled script. Instructions
   on file path resolution MUST be duplicated inline for any skill that writes files. Any change to

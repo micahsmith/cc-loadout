@@ -1,6 +1,7 @@
 .claude/
 node_modules/
 scratch/
+target/
 
 .DS_Store
 TODO.md
